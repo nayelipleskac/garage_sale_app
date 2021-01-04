@@ -40,7 +40,7 @@ class ProductItem extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 19,
               fontFamily: 'OpenSansCondensed',
             ),
           ),
