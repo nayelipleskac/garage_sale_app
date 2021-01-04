@@ -15,6 +15,8 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card();
+    return Card(
+      margin: EdgeInsets.all(10),
+    );
   }
 }
