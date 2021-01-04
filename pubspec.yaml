@@ -65,11 +65,11 @@ flutter:
       fonts:
         - asset: assets/OpenSansCondensed-Light.ttf
         - asset: assets/OpenSans-Bold.ttf
-          weight: 700
+          
     - family: Lato
       fonts:
         - asset: assets/Lato-Bold.ttf
-        weight: 800
+        
         - asset: assets/Lato-Black.ttf
           
   #
