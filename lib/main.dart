@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new2u_project/widgets/product_item.dart';
 
 import 'screens/product_overview_screen.dart';
 

@@ -64,7 +64,7 @@ flutter:
     - family: OpenSansCondensed
       fonts:
         - asset: assets/OpenSansCondensed-Light.ttf
-        - asset: assets/OpenSans-Bold.ttf
+        - asset: assets/OpenSansCondensed-Bold.ttf
           
     - family: Lato
       fonts:

@@ -1,6 +1,3 @@
-import 'dart:html';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../models/product_providers.dart';
@@ -23,7 +20,6 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Card(
       margin: EdgeInsets.all(10),
       child: Row(
@@ -36,7 +32,6 @@ class ProductItem extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          
           Text(
             title,
             style: TextStyle(
@@ -45,6 +40,13 @@ class ProductItem extends StatelessWidget {
             ),
           ),
           Text('\$$price'),
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(description),
         ],
       ),
     );
