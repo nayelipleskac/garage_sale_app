@@ -14,9 +14,25 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.amber,
         accentColor: Colors.indigo,
         fontFamily: 'OpenSansCondensed',
-       
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyText1: TextStyle(
+                color: Color.fromRGBO(20, 51, 52, 1),
+                fontSize: 30,
+              ),
+              bodyText2: TextStyle(
+                color: Color.fromRGBO(20, 51, 52, 1),
+                fontSize: 30,
+              ),
+              headline6: TextStyle(
+                fontSize: 30,
+                fontFamily: 'Lato',
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
       ),
       home: ProductOverviewScreen(),
     );
+    
   }
 }

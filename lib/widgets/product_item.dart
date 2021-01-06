@@ -22,32 +22,31 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.all(10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 19,
-              fontFamily: 'OpenSansCondensed',
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 30,
+                fontFamily: 'OpenSansCondensed',
+              ),
             ),
-          ),
-          Text('\$$price'),
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(description),
-        ],
+            Text('\$$price'),
+            Text(description),
+          ],
+        ),
       ),
     );
   }
