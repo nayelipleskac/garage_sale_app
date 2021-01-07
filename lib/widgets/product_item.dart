@@ -4,6 +4,9 @@ import '../models/product_providers.dart';
 import '../models/product.dart';
 
 class ProductItem extends StatelessWidget {
+
+  var _expanded = false;
+
   final String id;
   final String title;
   final String description;
@@ -20,32 +23,38 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Card(
-      margin: EdgeInsets.all(10),
+      //margin: EdgeInsets.all(10),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Container(
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  child: Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: 'OpenSansCondensed',
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontFamily: 'OpenSansCondensed',
+                ),
               ),
-            ),
-            Text('\$$price'),
-            Text(description),
-          ],
+              Container(
+                child: Text('\$$price'),
+              ),
+              //Text(description),
+            ],
+          ),
         ),
       ),
     );

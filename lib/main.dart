@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:new2u_project/widgets/product_item.dart';
 
 import 'screens/product_overview_screen.dart';
 
@@ -10,6 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'New2U Thrift Garage Sale',
+      
       theme: ThemeData(
         primaryColor: Colors.amber,
         accentColor: Colors.indigo,
