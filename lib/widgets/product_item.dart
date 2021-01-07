@@ -1,11 +1,7 @@
+
 import 'package:flutter/material.dart';
 
-import '../models/product_providers.dart';
-import '../models/product.dart';
-
-class ProductItem extends StatelessWidget {
-  var _expanded = false;
-
+class ProductItem extends StatefulWidget {
   final String id;
   final String title;
   final String description;
@@ -19,6 +15,13 @@ class ProductItem extends StatelessWidget {
     this.price,
     this.imageUrl,
   );
+
+  @override
+  _ProductItemState createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
+  var _expanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,27 +41,36 @@ class ProductItem extends StatelessWidget {
                   width: 200,
                   child: Image.network(
                     //imageUrl
-                    imageUrl,
+                    widget.imageUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               Text(
-                title,
+                widget.title,
                 style: TextStyle(
                   fontSize: 30,
                   fontFamily: 'OpenSansCondensed',
                 ),
               ),
               Container(
-                child: Text('\$$price'),
+                child: Text('\$${widget.price}'),
               ),
               IconButton(
-                  icon: Icon(
-                    Icons.expand_less,
-                  ),
-                  onPressed: () {})
-              //Text(description),
+                icon: Icon(
+                  _expanded ? Icons.expand_less : Icons.expand_more,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _expanded = !_expanded;
+                  });
+                },
+              ),
+              if (_expanded)
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  child: Text(widget.description),
+                ),
             ],
           ),
         ),
