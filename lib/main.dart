@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:new2u_project/screens/all_listings_screen.dart';
+import 'package:new2u_project/screens/cart_screen.dart';
 
 import 'screens/product_overview_screen.dart';
 
@@ -32,6 +34,11 @@ class MyApp extends StatelessWidget {
             ),
       ),
       home: ProductOverviewScreen(),
+      routes: {
+        //'/': (ctx) => ProductOverviewScreen(),
+        CartScreen.routeName: (ctx) => CartScreen(),
+        AllListings.routeName: (ctx) => AllListings(),
+       },
     );
     
   }

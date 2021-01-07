@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/product_item.dart';
 import '../models/product.dart';
+import '../widgets/drawer.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
   List<Product> _items = [
@@ -55,6 +56,7 @@ class ProductOverviewScreen extends StatelessWidget {
           ),
         ),
       ),
+      drawer: MainDrawer(),
       body: ListView.builder(
         padding: EdgeInsets.all(10),
         itemCount: items.length,
