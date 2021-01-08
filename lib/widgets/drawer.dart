@@ -43,7 +43,7 @@ class MainDrawer extends StatelessWidget {
           buildListTile('My Cart', Icons.shopping_cart, () {
             Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
           }),
-          buildListTile('All Listing', Icons.home, () {
+          buildListTile('All Listings', Icons.home, () {
             Navigator.of(context).pushReplacementNamed(AllListings.routeName);
           }),
         ],

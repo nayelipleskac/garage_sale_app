@@ -48,6 +48,14 @@ class ProductOverviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.add,
+            ),
+            onPressed: () {},
+          ),
+        ],
         centerTitle: true,
         title: Text(
           'My Items',

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ProductItem extends StatefulWidget {
@@ -26,13 +25,11 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      //margin: EdgeInsets.all(10),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
         child: Container(
           alignment: Alignment.center,
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
@@ -40,7 +37,6 @@ class _ProductItemState extends State<ProductItem> {
                   height: 200,
                   width: 200,
                   child: Image.network(
-                    //imageUrl
                     widget.imageUrl,
                     fit: BoxFit.cover,
                   ),
