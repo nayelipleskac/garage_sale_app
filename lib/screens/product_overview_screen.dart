@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new2u_project/screens/add_product_screen.dart';
 
 import '../widgets/product_item.dart';
 import '../models/product.dart';
@@ -53,7 +54,10 @@ class ProductOverviewScreen extends StatelessWidget {
             icon: Icon(
               Icons.add,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(AddProductScreen.routeName);
+            },
           ),
         ],
         centerTitle: true,
