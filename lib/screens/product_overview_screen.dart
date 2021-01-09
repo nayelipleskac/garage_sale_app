@@ -56,7 +56,7 @@ class ProductOverviewScreen extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.of(context)
-                  .pushReplacementNamed(AddProductScreen.routeName);
+                  .pushNamed(AddProductScreen.routeName);
             },
           ),
         ],
