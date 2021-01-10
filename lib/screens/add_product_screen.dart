@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/product_overview_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddProductScreen extends StatefulWidget {
   static const routeName = '/add-product';
@@ -19,7 +19,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   bool success = false;
 
-  Future<void> _submitData() {
+  Future<void> _submitData() async {
     if (titleController.text.isEmpty ||
         priceController.text.isEmpty ||
         descriptionController.text.isEmpty) {
@@ -32,6 +32,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     }
     final enteredTitle = titleController.text;
     final enteredPrice = int.parse(priceController.text);
+    final enteredDescription = descriptionController.text;
 
     if (enteredPrice <= 0) {
       print('negative value or 0 entered for price');
@@ -44,6 +45,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
     print('success');
     success = true;
     Navigator.of(context).pushNamed('/');
+
+    CollectionReference products =
+        FirebaseFirestore.instance.collection('Products');
+    await products.add(
+      {
+        'title': enteredTitle,
+        'price': enteredPrice,
+        'description': enteredDescription
+      },
+    );
   }
 
   @override

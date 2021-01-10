@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:new2u_project/screens/add_product_screen.dart';
-import 'package:new2u_project/screens/all_listings_screen.dart';
-import 'package:new2u_project/screens/cart_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
+import './screens/add_product_screen.dart';
+import './screens/all_listings_screen.dart';
+import './screens/cart_screen.dart';
 import 'screens/product_overview_screen.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Thrifty Garage',
-      
       theme: ThemeData(
         primaryColor: Colors.amber,
         accentColor: Colors.indigo,
@@ -40,8 +44,7 @@ class MyApp extends StatelessWidget {
         CartScreen.routeName: (ctx) => CartScreen(),
         AllListings.routeName: (ctx) => AllListings(),
         AddProductScreen.routeName: (ctx) => AddProductScreen(),
-       },
+      },
     );
-    
   }
 }
