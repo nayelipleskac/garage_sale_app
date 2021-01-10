@@ -39,6 +39,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       setState(() {
         feedback = 'Enter a positive value for price!';
         success = false;
+        print('');
       });
     }
     print('success');
