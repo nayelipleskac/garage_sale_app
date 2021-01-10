@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "902963464153",
+    "project_id": "thrifty-garage",
+    "storage_bucket": "thrifty-garage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902963464153:android:fc6b7fadab12be1c49bbc8",
+        "android_client_info": {
+          "package_name": "com.nayelipleskac.thrifty_garage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902963464153-j5hcdgnrtavro4pg4qt8u3ldi2cas523.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWHZlNnnFo1P5QNoWBzwPJuzwKpg9_IN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902963464153-j5hcdgnrtavro4pg4qt8u3ldi2cas523.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
