@@ -52,7 +52,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
       appBar: AppBar(
         title: Text(
           'Add a Product',
+          style: TextStyle(
+            fontSize: 28,
+            fontFamily: 'Lato',
+          ),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -92,6 +97,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     Icons.add_sharp,
                   ),
                 ),
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
               ),
               Padding(
                 padding: EdgeInsets.all(10),
