@@ -55,8 +55,7 @@ class ProductOverviewScreen extends StatelessWidget {
               Icons.add,
             ),
             onPressed: () {
-              Navigator.of(context)
-                  .pushNamed(AddProductScreen.routeName);
+              Navigator.of(context).pushNamed(AddProductScreen.routeName);
             },
           ),
         ],
@@ -64,6 +63,7 @@ class ProductOverviewScreen extends StatelessWidget {
         title: Text(
           'My Items',
           style: TextStyle(
+            fontFamily: 'Lato',
             fontSize: 28,
           ),
         ),

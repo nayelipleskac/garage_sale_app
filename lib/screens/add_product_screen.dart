@@ -11,18 +11,35 @@ class AddProductScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'Add an Item to Your Garage',
-                style: TextStyle(
-                  fontSize: 27,
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  'Add an Item to Your Garage',
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
                 ),
               ),
-            ),
-          ],
+              Divider(),
+              Text('Add a title for your item'),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Add a title',
+                    icon: Icon(
+                      Icons.add_sharp,
+                    ),
+                    
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
