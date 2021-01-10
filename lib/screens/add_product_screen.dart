@@ -1,15 +1,49 @@
 import 'package:flutter/material.dart';
+import '../screens/product_overview_screen.dart';
 
-class AddProductScreen extends StatelessWidget {
+class AddProductScreen extends StatefulWidget {
   static const routeName = '/add-product';
 
+  @override
+  _AddProductScreenState createState() => _AddProductScreenState();
+}
+
+class _AddProductScreenState extends State<AddProductScreen> {
   final titleController = TextEditingController();
+
   final priceController = TextEditingController();
+
   final descriptionController = TextEditingController();
 
+  String feedback = '';
+
+  bool success = false;
+
   Future<void> _submitData() {
+    if (titleController.text.isEmpty ||
+        priceController.text.isEmpty ||
+        descriptionController.text.isEmpty) {
+      print('one or more fields are empty');
+
+      setState(() {
+        feedback = 'Enter a value for all fields!';
+        success = false;
+      });
+    }
     final enteredTitle = titleController.text;
     final enteredPrice = int.parse(priceController.text);
+
+    if (enteredPrice <= 0) {
+      print('negative value or 0 entered for price');
+
+      setState(() {
+        feedback = 'Enter a positive value for price!';
+        success = false;
+      });
+    }
+    print('success');
+    success = true;
+    Navigator.of(context).pushNamed('/');
   }
 
   @override
