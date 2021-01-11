@@ -89,6 +89,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextField(
+                  controller: titleController,
                   decoration: InputDecoration(
                     labelText: 'Add a title',
                     icon: Icon(
@@ -102,6 +103,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 child: Text('Add a price for your item:'),
               ),
               TextField(
+                controller: priceController,
                 decoration: InputDecoration(
                   labelText: 'Add a price',
                   icon: Icon(
@@ -115,6 +117,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 child: Text('Add a description:'),
               ),
               TextField(
+                controller: descriptionController,
                 decoration: InputDecoration(
                   labelText: 'Add a description',
                   icon: Icon(
