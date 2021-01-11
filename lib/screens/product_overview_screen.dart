@@ -85,14 +85,15 @@ class ProductOverviewScreen extends StatelessWidget {
             }
             ListView.builder(
               padding: EdgeInsets.all(10),
-              itemCount: items.length,
+              itemCount: snapshot.data.docs.length,
               itemBuilder: (ctx, i) {
+                DocumentSnapshot prodDoc = snapshot.data.docs[i];
                 return ProductItem(
-                  items[i].id,
-                  items[i].title,
-                  items[i].description.toString(),
-                  items[i].price,
-                  items[i].imageUrl,
+                  prodDoc.id,
+                  prodDoc['title'],
+                  prodDoc['description'].toString(),
+                  prodDoc['price'],
+                  prodDoc['imageUrl'],
                 );
               },
             );
