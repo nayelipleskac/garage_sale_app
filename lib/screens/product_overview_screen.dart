@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:new2u_project/screens/add_product_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../screens/add_product_screen.dart';
 import '../widgets/product_item.dart';
 import '../models/product.dart';
 import '../widgets/drawer.dart';
+
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class ProductOverviewScreen extends StatelessWidget {
   List<Product> _items = [
@@ -69,19 +72,31 @@ class ProductOverviewScreen extends StatelessWidget {
         ),
       ),
       drawer: MainDrawer(),
-      body: ListView.builder(
-        padding: EdgeInsets.all(10),
-        itemCount: items.length,
-        itemBuilder: (ctx, i) {
-          return ProductItem(
-            items[i].id,
-            items[i].title,
-            items[i].description.toString(),
-            items[i].price,
-            items[i].imageUrl,
-          );
-        },
-      ),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: _firestore.collection('Products').snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something went wrong...');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text('Loading...');
+            }
+            ListView.builder(
+              padding: EdgeInsets.all(10),
+              itemCount: items.length,
+              itemBuilder: (ctx, i) {
+                return ProductItem(
+                  items[i].id,
+                  items[i].title,
+                  items[i].description.toString(),
+                  items[i].price,
+                  items[i].imageUrl,
+                );
+              },
+            );
+          }),
     );
   }
 }

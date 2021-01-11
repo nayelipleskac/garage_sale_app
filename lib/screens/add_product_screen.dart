@@ -125,7 +125,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (success == false) {
+                      await _submitData();
+                    }
+                  },
                   child: Text(
                     'Add Product',
                     style: TextStyle(
@@ -135,6 +139,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                 ),
               ),
+              Center(
+                child: Text(
+                  feedback,
+                  style: TextStyle(
+                    color: Theme.of(context).errorColor,
+                  ),
+                ),
+              )
             ],
           ),
         ),
