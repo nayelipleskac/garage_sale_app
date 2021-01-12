@@ -77,13 +77,15 @@ class ProductOverviewScreen extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
-              return Text('Something went wrong...');
+              return Text(
+                snapshot.error.toString(),
+              );
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Text('Loading...');
             }
-            ListView.builder(
+            return ListView.builder(
               padding: EdgeInsets.all(10),
               itemCount: snapshot.data.docs.length,
               itemBuilder: (ctx, i) {
