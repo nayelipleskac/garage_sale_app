@@ -52,7 +52,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       {
         'title': enteredTitle,
         'price': enteredPrice,
-        'description': enteredDescription
+        'description': enteredDescription,
       },
     );
   }
@@ -85,7 +85,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
               ),
               Divider(),
-              Text('Add a title for your item:'),
+              Text('Add the image url:'),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Add the image url',
+                    icon: Icon(
+                      Icons.add_sharp,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text('Add a title for your item:'),
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextField(
@@ -136,8 +151,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: Text(
                     'Add Product',
                     style: TextStyle(
-                      fontSize: 25,
-                      fontFamily: 'Lato',
+                      fontSize: 20,
+                      fontFamily: 'Lato-Light',
                     ),
                   ),
                 ),
