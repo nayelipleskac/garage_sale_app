@@ -64,8 +64,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
         title: Text(
           'Add a Product',
           style: TextStyle(
-            fontSize: 28,
-            fontFamily: 'Lato',
+            fontSize: 25,
+            fontFamily: 'Lato-Light',
           ),
         ),
         centerTitle: true,

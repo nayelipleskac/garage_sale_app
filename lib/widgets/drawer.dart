@@ -7,12 +7,12 @@ class MainDrawer extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        size: 32,
+        size: 27,
         color: Colors.amber,
       ),
       title: Text(
         title,
-        style: TextStyle(fontSize: 35),
+        style: TextStyle(fontSize: 27),
       ),
       onTap: tapHandler,
     );
@@ -24,16 +24,17 @@ class MainDrawer extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 70,
+            height: 50,
           ),
           Container(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(15),
             alignment: Alignment.center,
             child: Text(
-              'The Combo of Your Favorite Thrift Stores and Garage Sales',
+              'Thrifty Garage',
               style: TextStyle(
-                fontSize: 36,
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
+                fontFamily: ''
               ),
             ),
           ),
