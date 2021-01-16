@@ -9,6 +9,8 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
+  final imageUrlController = TextEditingController();
+
   final titleController = TextEditingController();
 
   final priceController = TextEditingController();
@@ -20,7 +22,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   bool success = false;
 
   Future<void> _submitData() async {
-    if (titleController.text.isEmpty ||
+    if (imageUrlController.text.isEmpty ||
+        titleController.text.isEmpty ||
         priceController.text.isEmpty ||
         descriptionController.text.isEmpty) {
       print('one or more fields are empty');
@@ -30,6 +33,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         success = false;
       });
     }
+    final enteredImageUrl = imageUrlController.text;
     final enteredTitle = titleController.text;
     final enteredPrice = int.parse(priceController.text);
     final enteredDescription = descriptionController.text;
@@ -50,10 +54,29 @@ class _AddProductScreenState extends State<AddProductScreen> {
         FirebaseFirestore.instance.collection('Products');
     await products.add(
       {
+        'imageUrl': enteredImageUrl,
         'title': enteredTitle,
         'price': enteredPrice,
         'description': enteredDescription,
       },
+    );
+  }
+
+  Widget buildTextField(
+    String labelText,
+    TextEditingController controller,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: labelText,
+          icon: Icon(
+            Icons.add_sharp,
+          ),
+        ),
+      ),
     );
   }
 
@@ -86,59 +109,39 @@ class _AddProductScreenState extends State<AddProductScreen> {
               ),
               Divider(),
               Text('Add the image url:'),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Add the image url',
-                    icon: Icon(
-                      Icons.add_sharp,
-                    ),
-                  ),
-                ),
-              ),
+              buildTextField('Add the image url', imageUrlController),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text('Add a title for your item:'),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextField(
-                  controller: titleController,
-                  decoration: InputDecoration(
-                    labelText: 'Add a title',
-                    icon: Icon(
-                      Icons.add_sharp,
-                    ),
-                  ),
-                ),
+              buildTextField(
+                'Add a title',
+                titleController,
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text('Add a price for your item:'),
               ),
-              TextField(
-                controller: priceController,
-                decoration: InputDecoration(
-                  labelText: 'Add a price',
-                  icon: Icon(
-                    Icons.add_sharp,
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextField(
+                  controller: priceController,
+                  decoration: InputDecoration(
+                    labelText: 'Add a price',
+                    icon: Icon(
+                      Icons.add_sharp,
+                    ),
                   ),
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                 ),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
               ),
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text('Add a description:'),
               ),
-              TextField(
-                controller: descriptionController,
-                decoration: InputDecoration(
-                  labelText: 'Add a description',
-                  icon: Icon(
-                    Icons.add_sharp,
-                  ),
-                ),
+              buildTextField(
+                'Add a description',
+                descriptionController,
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
