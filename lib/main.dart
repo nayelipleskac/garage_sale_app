@@ -1,12 +1,15 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import './screens/add_product_screen.dart';
 import './screens/all_listings_screen.dart';
 import './screens/cart_screen.dart';
-import 'screens/product_overview_screen.dart';
+import './screens/product_overview_screen.dart';
 
 void main() async {
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
