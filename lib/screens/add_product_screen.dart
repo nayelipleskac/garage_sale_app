@@ -35,7 +35,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     }
     final enteredImageUrl = imageUrlController.text;
     final enteredTitle = titleController.text;
-    final enteredPrice = int.parse(priceController.text);
+    final enteredPrice = double.parse(priceController.text);
     final enteredDescription = descriptionController.text;
 
     if (enteredPrice <= 0) {
