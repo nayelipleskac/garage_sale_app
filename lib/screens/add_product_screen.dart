@@ -108,8 +108,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
               ),
               Divider(),
-              Text('Add the image url:'),
-              buildTextField('Add the image url', imageUrlController),
+              Text('Add the image:'),
+              SizedBox(
+                height: 20,
+              ),
+              IconButton(
+                icon: Icon(Icons.camera_alt),
+                onPressed: () {},
+                iconSize: 30,
+              ),
+              //buildTextField('Add the image url', imageUrlController),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text('Add a title for your item:'),
