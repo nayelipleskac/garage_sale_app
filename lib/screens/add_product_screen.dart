@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:new2u_project/screens/take_picture_screen.dart';
 
 class AddProductScreen extends StatefulWidget {
   static const routeName = '/add-product';
@@ -114,7 +115,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
               ),
               IconButton(
                 icon: Icon(Icons.camera_alt),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushReplacementNamed(TakePictureScreen.routeName);
+                },
                 iconSize: 30,
               ),
               //buildTextField('Add the image url', imageUrlController),

@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
         AddProductScreen.routeName: (ctx) => AddProductScreen(),
         DisplayPictureScreen.routeName: (ctx) =>
             DisplayPictureScreen(imagePath),
+          TakePictureScreen.routeName: (ctx) => TakePictureScreen(camera: firstCamera,),
       },
     );
   }

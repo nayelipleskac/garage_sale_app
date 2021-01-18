@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:new2u_project/screens/display_picture_screen.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
-import 'package:new2u_project/main.dart';
 
 // Future<void> main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +12,8 @@ import 'package:new2u_project/main.dart';
 
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
+  static const routeName = '/take-picture-screen';
+  final String path = '';
 
   const TakePictureScreen({
     Key key,
