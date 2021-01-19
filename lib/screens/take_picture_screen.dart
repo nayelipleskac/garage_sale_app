@@ -13,7 +13,6 @@ import 'package:path_provider/path_provider.dart';
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
   static const routeName = '/take-picture-screen';
-  final String path = '';
 
   const TakePictureScreen({
     Key key,
@@ -96,6 +95,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
             // If an error occurs, log the error to the console.
             print(e);
           }
+          
         },
       ),
     );

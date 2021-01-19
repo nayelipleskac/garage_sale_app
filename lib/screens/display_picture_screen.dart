@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import './take_picture_screen.dart';
+
 class DisplayPictureScreen extends StatelessWidget {
   static const routeName = '/display-picture';
-  final String imagePath;
+  final String imgPath;
 
-  DisplayPictureScreen(this.imagePath);
+  DisplayPictureScreen(this.imgPath);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class DisplayPictureScreen extends StatelessWidget {
         title: Text('Displayed Picture'),
       ),
       body: Image.file(
-        File(imagePath),
+        File(imgPath),
       ),
     );
   }
