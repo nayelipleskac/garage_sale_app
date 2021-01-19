@@ -7,6 +7,7 @@ import './screens/all_listings_screen.dart';
 import './screens/cart_screen.dart';
 import './screens/take_picture_screen.dart';
 import './screens/display_picture_screen.dart';
+import './screens/product_overview_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,9 +18,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final String imagePath;
+  
   final CameraDescription firstCamera;
-  MyApp({this.firstCamera, this.imagePath});
+  MyApp({this.firstCamera});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,15 +46,15 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      //home: ProductOverviewScreen(),
-      home: TakePictureScreen(camera: firstCamera),
+      home: ProductOverviewScreen(),
+      //home: TakePictureScreen(camera: firstCamera),
       routes: {
         //'/': (ctx) => ProductOverviewScreen(),
         CartScreen.routeName: (ctx) => CartScreen(),
         AllListings.routeName: (ctx) => AllListings(),
         AddProductScreen.routeName: (ctx) => AddProductScreen(),
-        DisplayPictureScreen.routeName: (ctx) =>
-            DisplayPictureScreen(imagePath),
+        // DisplayPictureScreen.routeName: (ctx) =>
+        //     DisplayPictureScreen(imgPath),
           TakePictureScreen.routeName: (ctx) => TakePictureScreen(camera: firstCamera,),
       },
     );

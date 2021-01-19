@@ -25,6 +25,7 @@ class TakePictureScreen extends StatefulWidget {
 
 class _TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _controller;
+  String imagePath;
   Future<void> _initializeControllerFuture;
 
   @override
@@ -66,38 +67,41 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera_alt),
-        // Provide an onPressed callback.
-        onPressed: () async {
-          // Take the Picture in a try / catch block. If anything goes wrong,
-          // catch the error.
-          try {
-            // Ensure that the camera is initialized.
-            await _initializeControllerFuture;
+          child: Icon(Icons.camera_alt),
+          // Provide an onPressed callback.
+          onPressed: () async {
+            // Take the Picture in a try / catch block. If anything goes wrong,
+            // catch the error.
+            try {
+              // Ensure that the camera is initialized.
+              await _initializeControllerFuture;
 
-            // Construct the path where the image should be saved using the path
-            // package.
-            final path = join(
-              // Store the picture in the temp directory.
-              // Find the temp directory using the `path_provider` plugin.
-              (await getTemporaryDirectory()).path,
-              '${DateTime.now()}.png',
-            );
-            print(path);
+              // Construct the path where the image should be saved using the path
+              // package.
+              // final path = join(
+              //   // Store the picture in the temp directory.
+              //   // Find the temp directory using the `path_provider` plugin.
+              //   (await getTemporaryDirectory()).path,
+              //   '${DateTime.now()}.png',
+              // );
+              // print(path);
 
-            // Attempt to take a picture and log where it's been saved.
-            final imgPath = await _controller.takePicture();
-            Navigator.pushNamed(context, DisplayPictureScreen.routeName);
-            print(
-              'FILE WHERE IMAGE IS STORED:' + imgPath.path.toString(),
-            );
-          } catch (e) {
-            // If an error occurs, log the error to the console.
-            print(e);
-          }
-          
-        },
-      ),
+              // Attempt to take a picture and log where it's been saved.
+              final xFile = await _controller.takePicture();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DisplayPictureScreen(xFile),
+                ),
+              );
+              print(
+                'FILE WHERE IMAGE IS STORED:' + xFile.path.toString(),
+              );
+            } catch (e) {
+              // If an error occurs, log the error to the cosole.
+              print(e);
+            }
+          }),
     );
   }
 }
