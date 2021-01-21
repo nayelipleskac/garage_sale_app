@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
-import './take_picture_screen.dart';
+import 'add_product_screen_with_image.dart';
 
 class DisplayPictureScreen extends StatelessWidget {
   static const routeName = '/display-picture';
@@ -18,6 +17,21 @@ class DisplayPictureScreen extends StatelessWidget {
           'Displayed Picture',
           style: TextStyle(fontSize: 25, fontFamily: 'Lato-Light'),
         ),
+        actions: [
+          GestureDetector(
+            child: IconButton(
+              icon: Icon(Icons.arrow_forward),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddProductScreenWithImage(imgFile),
+                  ),
+                );
+              },
+            ),
+          )
+        ],
         centerTitle: true,
       ),
       // body: Text(
