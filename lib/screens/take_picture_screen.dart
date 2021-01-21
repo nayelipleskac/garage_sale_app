@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:new2u_project/screens/display_picture_screen.dart';
 
-
 // Future<void> main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   final cameras = await availableCameras();
@@ -50,7 +49,13 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take a picture'),
+        title: Text(
+          'Take a picture',
+          style: TextStyle(
+            fontFamily: 'Lato-Light',
+            fontSize: 25,
+          ),
+        ),
         centerTitle: true,
       ),
       body: FutureBuilder<void>(
