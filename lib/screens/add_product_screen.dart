@@ -10,8 +10,6 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
-  final imageUrlController = TextEditingController();
-
   final titleController = TextEditingController();
 
   final priceController = TextEditingController();
@@ -23,8 +21,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   bool success = false;
 
   Future<void> _submitData() async {
-    if (imageUrlController.text.isEmpty ||
-        titleController.text.isEmpty ||
+    if (titleController.text.isEmpty ||
         priceController.text.isEmpty ||
         descriptionController.text.isEmpty) {
       print('one or more fields are empty');
@@ -34,7 +31,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         success = false;
       });
     }
-    final enteredImageUrl = imageUrlController.text;
+
     final enteredTitle = titleController.text;
     final enteredPrice = double.parse(priceController.text);
     final enteredDescription = descriptionController.text;
@@ -55,7 +52,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
         FirebaseFirestore.instance.collection('Products');
     await products.add(
       {
-        'imageUrl': enteredImageUrl,
         'title': enteredTitle,
         'price': enteredPrice,
         'description': enteredDescription,

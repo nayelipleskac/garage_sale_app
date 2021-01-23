@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import './display_picture_screen.dart';
 
 class AddProductScreenWithImage extends StatefulWidget {
   static const routeName = '/add-product-with-image';
@@ -17,8 +16,6 @@ class AddProductScreenWithImage extends StatefulWidget {
 }
 
 class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
-  //final imageUrlController = TextEditingController();
-
   final titleController = TextEditingController();
 
   final priceController = TextEditingController();
