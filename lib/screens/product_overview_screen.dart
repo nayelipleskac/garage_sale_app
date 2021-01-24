@@ -8,8 +8,10 @@ import '../widgets/drawer.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 firebase_storage.FirebaseStorage storage =
-  firebase_storage.FirebaseStorage.instance;
+    firebase_storage.FirebaseStorage.instance;
 
+firebase_storage.Reference ref =
+    firebase_storage.FirebaseStorage.instance.ref('');
 
 class ProductOverviewScreen extends StatelessWidget {
   @override

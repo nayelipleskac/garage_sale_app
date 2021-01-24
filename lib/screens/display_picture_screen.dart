@@ -30,7 +30,7 @@ class DisplayPictureScreen extends StatelessWidget {
                 );
               },
             ),
-          )
+          ),
         ],
         centerTitle: true,
       ),

@@ -37,7 +37,7 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
         success = false;
       });
     }
-    //final enteredImageUrl = imageUrlController.text;
+
     final enteredTitle = titleController.text;
     final enteredPrice = double.parse(priceController.text);
     final enteredDescription = descriptionController.text;
@@ -58,7 +58,6 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
         FirebaseFirestore.instance.collection('Products');
     await products.add(
       {
-        //'imageUrl': enteredImageUrl,
         'title': enteredTitle,
         'price': enteredPrice,
         'description': enteredDescription,
@@ -129,6 +128,15 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
                       ),
                       fit: BoxFit.cover,
                     ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    widget.imgFile.path,
                   ),
                 ),
               ),
