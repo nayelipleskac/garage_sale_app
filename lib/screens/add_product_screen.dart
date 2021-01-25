@@ -117,7 +117,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 },
                 iconSize: 30,
               ),
-              //buildTextField('Add the image url', imageUrlController),
+              
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text('Add a title for your item:'),

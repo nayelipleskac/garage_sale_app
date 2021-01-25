@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:new2u_project/screens/product_overview_screen.dart';
 
 class AddProductScreenWithImage extends StatefulWidget {
   static const routeName = '/add-product-with-image';
@@ -131,15 +132,15 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    widget.imgFile.path,
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(15.0),
+              //   child: Container(
+              //     alignment: Alignment.center,
+              //     child: Text(
+              //       widget.imgFile.path,
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text('Add a title for your item:'),

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -7,13 +10,30 @@ import '../widgets/product_item.dart';
 import '../widgets/drawer.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 firebase_storage.FirebaseStorage storage =
     firebase_storage.FirebaseStorage.instance;
 
 firebase_storage.Reference ref =
-    firebase_storage.FirebaseStorage.instance.ref('');
+    firebase_storage.FirebaseStorage.instance.ref('/product images');
+
+Future<void> uploadFile() async {
+  File file = File(
+    
+  );
+  // file = imgFile.path
+  try {
+    await firebase_storage.FirebaseStorage.instance
+        .ref('/product images')
+        .putFile(file);
+  } catch (e) {
+    print('canceled' + e.toString());
+  }
+}
 
 class ProductOverviewScreen extends StatelessWidget {
+  static const routeName = 'product-overview-screen';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +43,9 @@ class ProductOverviewScreen extends StatelessWidget {
             icon: Icon(
               Icons.add,
             ),
-            onPressed: () {
-              Navigator.of(context).pushNamed(AddProductScreen.routeName);
+            onPressed: () async {
+              await uploadFile();
+              //Navigator.of(context).pushNamed(AddProductScreen.routeName);
             },
           ),
         ],
@@ -61,7 +82,7 @@ class ProductOverviewScreen extends StatelessWidget {
                   prodDoc['title'],
                   prodDoc['description'].toString(),
                   prodDoc['price'].toDouble(),
-                  prodDoc['imageUrl'],
+                  //prodDoc['imageUrl'],
                 );
               },
             );

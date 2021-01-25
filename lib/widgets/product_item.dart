@@ -5,14 +5,14 @@ class ProductItem extends StatefulWidget {
   final String title;
   final String description;
   final double price;
-  final String imageUrl;
+  
 
   ProductItem(
     this.id,
     this.title,
     this.description,
     this.price,
-    this.imageUrl,
+    
   );
 
   @override
@@ -31,17 +31,17 @@ class _ProductItemState extends State<ProductItem> {
           alignment: Alignment.center,
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Container(
-                  height: 200,
-                  width: 200,
-                  child: Image.network(
-                    widget.imageUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(15),
+              //   child: Container(
+              //     height: 200,
+              //     width: 200,
+              //     child: Image.network(
+              //       widget.imageUrl,
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
               Text(
                 widget.title,
                 style: TextStyle(
