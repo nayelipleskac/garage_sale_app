@@ -1,9 +1,9 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:new2u_project/screens/product_overview_screen.dart';
+
+import '../screens/product_overview_screen.dart';
 
 class AddProductScreenWithImage extends StatefulWidget {
   static const routeName = '/add-product-with-image';
@@ -53,7 +53,9 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
     }
     print('success');
     success = true;
-    Navigator.of(context).pushNamed('/');
+    MaterialPageRoute(
+      builder: (context) => ProductOverviewScreen(widget.imgFile),
+    );
 
     CollectionReference products =
         FirebaseFirestore.instance.collection('Products');

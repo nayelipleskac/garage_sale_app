@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: ProductOverviewScreen(),
+      home: ProductOverviewScreen(imgFile),
       //home: TakePictureScreen(camera: firstCamera),
       routes: {
         //'/': (ctx) => ProductOverviewScreen(),

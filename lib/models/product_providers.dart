@@ -34,7 +34,7 @@
 //       description: 'Holds all your book series!',
 //       price: 49.99,
 //       imageUrl:
-//           'https://media1.popsugar-assets.com/files/thumbor/ElMFl63Geo_oKFDu-IYukAf9LHc/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2018/07/18/631/n/1922564/36f213929fbe8c85_netimgzsJBXw/i/Shein-Crop-Cami-Top.jpg',
+          // 'https://media1.popsugar-assets.com/files/thumbor/ElMFl63Geo_oKFDu-IYukAf9LHc/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2018/07/18/631/n/1922564/36f213929fbe8c85_netimgzsJBXw/i/Shein-Crop-Cami-Top.jpg',
 //     ),
 //   ];
 

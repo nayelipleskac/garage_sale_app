@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../screens/add_product_screen.dart';
 import '../widgets/product_item.dart';
 import '../widgets/drawer.dart';
-
+import './add_product_screen_with_image.dart';
+import './add_product_screen.dart';
+//
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 firebase_storage.FirebaseStorage storage =
@@ -17,9 +18,9 @@ firebase_storage.FirebaseStorage storage =
 firebase_storage.Reference ref =
     firebase_storage.FirebaseStorage.instance.ref('/product images');
 
-Future<void> uploadFile() async {
+Future<void> uploadFile(imgFile) async {
   File file = File(
-    
+    imgFile.path,
   );
   // file = imgFile.path
   try {
@@ -32,8 +33,10 @@ Future<void> uploadFile() async {
 }
 
 class ProductOverviewScreen extends StatelessWidget {
-  static const routeName = 'product-overview-screen';
+  final XFile imgFile;
+  ProductOverviewScreen(this.imgFile);
 
+  static const routeName = 'product-overview-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +47,8 @@ class ProductOverviewScreen extends StatelessWidget {
               Icons.add,
             ),
             onPressed: () async {
-              await uploadFile();
-              //Navigator.of(context).pushNamed(AddProductScreen.routeName);
+              //await uploadFile(imgFile);
+              Navigator.of(context).pushNamed(AddProductScreen.routeName);
             },
           ),
         ],
