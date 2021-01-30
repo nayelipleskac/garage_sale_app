@@ -54,9 +54,20 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
     }
     print('success');
     success = true;
-    Navigator.of(context).pushNamed(ProductOverviewScreen.routeName);
+    Navigator.of(context).pushNamed('/');
 
-    firebase_storage.FirebaseStorage storage =
+    CollectionReference products =
+        FirebaseFirestore.instance.collection('Products');
+    await products.add(
+      {
+        'title': enteredTitle,
+        'price': enteredPrice,
+        'description': enteredDescription,
+      },
+    );
+  }
+
+  firebase_storage.FirebaseStorage storage =
         firebase_storage.FirebaseStorage.instance;
 
     firebase_storage.Reference ref =
@@ -75,17 +86,6 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
         print('CANCELED' + e.toString());
       }
     }
-
-    CollectionReference products =
-        FirebaseFirestore.instance.collection('Products');
-    await products.add(
-      {
-        'title': enteredTitle,
-        'price': enteredPrice,
-        'description': enteredDescription,
-      },
-    );
-  }
 
   Widget buildTextField(
     String labelText,
@@ -223,7 +223,7 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
                     color: Theme.of(context).errorColor,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
