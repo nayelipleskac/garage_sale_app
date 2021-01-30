@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../screens/product_overview_screen.dart';
 
@@ -53,9 +54,27 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
     }
     print('success');
     success = true;
-    MaterialPageRoute(
-      builder: (context) => ProductOverviewScreen(widget.imgFile),
-    );
+    Navigator.of(context).pushNamed(ProductOverviewScreen.routeName);
+
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+
+    firebase_storage.Reference ref =
+        firebase_storage.FirebaseStorage.instance.ref('/product images');
+
+    Future<void> uploadFile(imgFile) async {
+      File file = File(
+        imgFile.path,
+      );
+      // file = imgFile.path
+      try {
+        await firebase_storage.FirebaseStorage.instance
+            .ref('/product images')
+            .putFile(file);
+      } catch (e) {
+        print('CANCELED' + e.toString());
+      }
+    }
 
     CollectionReference products =
         FirebaseFirestore.instance.collection('Products');
@@ -182,6 +201,10 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
                   onPressed: () async {
                     if (success == false) {
                       await _submitData();
+                    }
+                    if (success == true) {
+                      await uploadFile(widget.imgFile);
+                      print('SUCCESS = TRUE');
                     }
                   },
                   child: Text(

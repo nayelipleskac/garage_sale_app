@@ -12,29 +12,29 @@ import './add_product_screen.dart';
 //
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-firebase_storage.FirebaseStorage storage =
-    firebase_storage.FirebaseStorage.instance;
+// firebase_storage.FirebaseStorage storage =
+//     firebase_storage.FirebaseStorage.instance;
 
-firebase_storage.Reference ref =
-    firebase_storage.FirebaseStorage.instance.ref('/product images');
+// firebase_storage.Reference ref =
+//     firebase_storage.FirebaseStorage.instance.ref('/product images');
 
-Future<void> uploadFile(imgFile) async {
-  File file = File(
-    imgFile.path,
-  );
-  // file = imgFile.path
-  try {
-    await firebase_storage.FirebaseStorage.instance
-        .ref('/product images')
-        .putFile(file);
-  } catch (e) {
-    print('canceled' + e.toString());
-  }
-}
+// Future<void> uploadFile(imgFile) async {
+//   File file = File(
+//     imgFile.path,
+//   );
+//   // file = imgFile.path
+//   try {
+//     await firebase_storage.FirebaseStorage.instance
+//         .ref('/product images')
+//         .putFile(file);
+//   } catch (e) {
+//     print('canceled' + e.toString());
+//   }
+// }
 
 class ProductOverviewScreen extends StatelessWidget {
-  final XFile imgFile;
-  ProductOverviewScreen(this.imgFile);
+  // final XFile imgFile;
+  // ProductOverviewScreen(this.imgFile);
 
   static const routeName = 'product-overview-screen';
   @override
