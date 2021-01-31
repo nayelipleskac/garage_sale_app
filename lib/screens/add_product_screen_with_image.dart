@@ -68,24 +68,24 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
   }
 
   firebase_storage.FirebaseStorage storage =
-        firebase_storage.FirebaseStorage.instance;
+      firebase_storage.FirebaseStorage.instance;
 
-    firebase_storage.Reference ref =
-        firebase_storage.FirebaseStorage.instance.ref('/product images');
+  firebase_storage.Reference ref =
+      firebase_storage.FirebaseStorage.instance.ref('/product_images');
 
-    Future<void> uploadFile(imgFile) async {
-      File file = File(
-        imgFile.path,
-      );
-      // file = imgFile.path
-      try {
-        await firebase_storage.FirebaseStorage.instance
-            .ref('/product images')
-            .putFile(file);
-      } catch (e) {
-        print('CANCELED' + e.toString());
-      }
+  Future<void> uploadFile(imgFile) async {
+    File file = File(
+      imgFile.path,
+    );
+    // file = imgFile.path
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('/product_images')
+          .putFile(file);
+    } catch (e) {
+      print('CANCELED' + e.toString());
     }
+  }
 
   Widget buildTextField(
     String labelText,
@@ -133,7 +133,7 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
                 ),
               ),
               Divider(),
-              Text('Add the image:'),
+              Text('Displayed Image:'),
               SizedBox(
                 height: 20,
               ),
