@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../screens/product_overview_screen.dart';
-
 class AddProductScreenWithImage extends StatefulWidget {
   static const routeName = '/add-product-with-image';
 
   final XFile imgFile;
   AddProductScreenWithImage(this.imgFile);
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   _AddProductScreenWithImageState createState() =>
@@ -29,9 +29,13 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
   bool success = false;
 
   Future<void> _submitData() async {
-    if (titleController.text.isEmpty ||
-        priceController.text.isEmpty ||
-        descriptionController.text.isEmpty) {
+    final enteredTitle = titleController.text;
+    final enteredPrice = double.parse(priceController.text);
+    final enteredDescription = descriptionController.text;
+
+    if (enteredTitle.isEmpty ||
+        enteredPrice.toString().isEmpty ||
+        enteredDescription.isEmpty) {
       print('one or more fields are empty');
 
       setState(() {
@@ -39,10 +43,6 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
         success = false;
       });
     }
-
-    final enteredTitle = titleController.text;
-    final enteredPrice = double.parse(priceController.text);
-    final enteredDescription = descriptionController.text;
 
     if (enteredPrice <= 0) {
       print('negative value or 0 entered for price');
@@ -52,19 +52,9 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
         success = false;
       });
     }
-    print('success');
+    print('success!!!');
     success = true;
     Navigator.of(context).pushNamed('/');
-
-    CollectionReference products =
-        FirebaseFirestore.instance.collection('Products');
-    await products.add(
-      {
-        'title': enteredTitle,
-        'price': enteredPrice,
-        'description': enteredDescription,
-      },
-    );
   }
 
   firebase_storage.FirebaseStorage storage =
@@ -77,20 +67,38 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
     File file = File(
       imgFile.path,
     );
-    // file = imgFile.path
     try {
-      await firebase_storage.FirebaseStorage.instance
+      firebase_storage.TaskSnapshot task = await firebase_storage
+          .FirebaseStorage.instance
           .ref('/product_images')
           .putFile(file);
+
+      print(
+        'TASK: ' + task.toString(),
+      );
     } catch (e) {
       print('CANCELED' + e.toString());
     }
+
+    // await storage.ref().child("product_images").putFile(file).getDownloadUrl();
+
+    final enteredTitle = titleController.text;
+    final enteredPrice = double.parse(priceController.text);
+    final enteredDescription = descriptionController.text;
+
+    CollectionReference products =
+        FirebaseFirestore.instance.collection('Products');
+    await products.add(
+      {
+        'title': enteredTitle,
+        'price': enteredPrice,
+        'description': enteredDescription,
+        'url': 'downloadedUrl',
+      },
+    );
   }
 
-  Widget buildTextField(
-    String labelText,
-    TextEditingController controller,
-  ) {
+  Widget buildTextField(String labelText, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
@@ -153,15 +161,6 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.all(15.0),
-              //   child: Container(
-              //     alignment: Alignment.center,
-              //     child: Text(
-              //       widget.imgFile.path,
-              //     ),
-              //   ),
-              // ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text('Add a title for your item:'),
