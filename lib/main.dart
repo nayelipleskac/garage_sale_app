@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:new2u_project/screens/all_listings_detail_screen.dart';
 
 import './screens/add_product_screen.dart';
 import './screens/all_listings_screen.dart';
@@ -46,18 +47,18 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: ProductOverviewScreen(),
+      home: AllListingsScreen(),
       //home: TakePictureScreen(camera: firstCamera),
       routes: {
         //'/': (ctx) => ProductOverviewScreen(),
         CartScreen.routeName: (ctx) => CartScreen(),
-        AllListings.routeName: (ctx) => AllListings(),
+        AllListingsScreen.routeName: (ctx) => AllListingsScreen(),
         AddProductScreen.routeName: (ctx) => AddProductScreen(),
-
         TakePictureScreen.routeName: (ctx) =>
             TakePictureScreen(camera: firstCamera),
         AddProductScreenWithImage.routeName: (ctx) =>
             AddProductScreenWithImage(imgFile),
+        AllListingsDetailScreen.routeName: (ctx) => AllListingsDetailScreen(),
       },
     );
   }
