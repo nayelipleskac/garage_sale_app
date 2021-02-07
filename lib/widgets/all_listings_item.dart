@@ -62,7 +62,7 @@ class AllListingsItem extends StatelessWidget {
                                 Navigator.of(context).pushNamed(
                                     AllListingsDetailScreen.routeName);
                               },
-                            )
+                            ),
                           ],
                         ),
                       ),

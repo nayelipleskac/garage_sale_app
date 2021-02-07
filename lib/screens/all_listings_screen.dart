@@ -28,6 +28,7 @@ class AllListingsScreen extends StatelessWidget {
             imageUrl: listedProducts[index].imageUrl,
           );
         },
+        itemCount: listedProducts.length,
       ),
     );
   }

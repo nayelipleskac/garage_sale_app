@@ -18,8 +18,6 @@ void main() async {
   runApp(MyApp(firstCamera: firstCamera));
 }
 
-
-
 class MyApp extends StatelessWidget {
   final CameraDescription firstCamera;
   final XFile imgFile;
@@ -51,7 +49,6 @@ class MyApp extends StatelessWidget {
       ),
       home: ProductOverviewScreen(),
       routes: {
-        //'/': (ctx) => ProductOverviewScreen(),
         CartScreen.routeName: (ctx) => CartScreen(),
         AllListingsScreen.routeName: (ctx) => AllListingsScreen(listedProducts),
         AddProductScreen.routeName: (ctx) => AddProductScreen(),
