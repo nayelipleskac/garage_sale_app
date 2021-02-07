@@ -5,7 +5,6 @@ import '../models/product.dart';
 
 class AllListingsScreen extends StatelessWidget {
   static const routeName = '/all-listings';
-
   final List<Product> listedProducts;
   AllListingsScreen(this.listedProducts);
 

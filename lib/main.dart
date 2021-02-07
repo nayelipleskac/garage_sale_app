@@ -1,8 +1,8 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:new2u_project/screens/all_listings_detail_screen.dart';
 
+import './screens/all_listings_detail_screen.dart';
 import './screens/add_product_screen.dart';
 import './screens/all_listings_screen.dart';
 import './screens/cart_screen.dart';
@@ -17,6 +17,8 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MyApp(firstCamera: firstCamera));
 }
+
+
 
 class MyApp extends StatelessWidget {
   final CameraDescription firstCamera;
