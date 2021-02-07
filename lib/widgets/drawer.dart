@@ -32,10 +32,7 @@ class MainDrawer extends StatelessWidget {
             child: Text(
               'Thrifty Garage',
               style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                fontFamily: ''
-              ),
+                  fontSize: 30, fontWeight: FontWeight.bold, fontFamily: ''),
             ),
           ),
           buildListTile('My Items', Icons.shopping_bag, () {
@@ -45,7 +42,8 @@ class MainDrawer extends StatelessWidget {
             Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
           }),
           buildListTile('All Listings', Icons.home, () {
-            Navigator.of(context).pushReplacementNamed(AllListingsScreen.routeName);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AllListingsScreen()));
           }),
         ],
       ),
