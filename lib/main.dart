@@ -47,12 +47,11 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: AllListingsScreen(),
-      //home: TakePictureScreen(camera: firstCamera),
+      home: ProductOverviewScreen(),
       routes: {
         //'/': (ctx) => ProductOverviewScreen(),
         CartScreen.routeName: (ctx) => CartScreen(),
-        AllListingsScreen.routeName: (ctx) => AllListingsScreen(),
+        //AllListingsScreen.routeName: (ctx) => AllListingsScreen(),
         AddProductScreen.routeName: (ctx) => AddProductScreen(),
         TakePictureScreen.routeName: (ctx) =>
             TakePictureScreen(camera: firstCamera),
