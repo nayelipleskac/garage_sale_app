@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/drawer.dart';
-import '../models/product.dart';
-import '../models/product_providers.dart';
 import '../screens/all_listings_detail_screen.dart';
 
 class AllListingsItem extends StatelessWidget {
-  final String id;
   final String title;
   final double price;
   final String imageUrl;
 
-  AllListingsItem(this.id, this.title, this.price, this.imageUrl);
+  AllListingsItem({
+    @required this.title,
+    @required this.price,
+    @required this.imageUrl,
+  });
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
