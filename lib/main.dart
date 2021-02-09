@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: ProductOverviewScreen(),
+      home: AllListingsScreen(),
       routes: {
         CartScreen.routeName: (ctx) => CartScreen(),
         AllListingsScreen.routeName: (ctx) => AllListingsScreen(),
@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
             TakePictureScreen(camera: firstCamera),
         AddProductScreenWithImage.routeName: (ctx) =>
             AddProductScreenWithImage(imgFile),
+        ProductOverviewScreen.routeName: (ctx) => ProductOverviewScreen(),
         AllListingsDetailScreen.routeName: (ctx) => AllListingsDetailScreen(),
       },
     );

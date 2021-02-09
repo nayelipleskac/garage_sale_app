@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/drawer.dart';
 import '../screens/all_listings_detail_screen.dart';
+import '../screens/all_listings_screen.dart';
 
 class AllListingsItem extends StatelessWidget {
   final String id;

@@ -8,7 +8,7 @@ import './add_product_screen.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class ProductOverviewScreen extends StatelessWidget {
-  static const routeName = 'product-overview-screen';
+  static const routeName = '/product-overview-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
