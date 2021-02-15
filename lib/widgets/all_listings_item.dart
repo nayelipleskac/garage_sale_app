@@ -4,6 +4,8 @@ import '../screens/all_listings_detail_screen.dart';
 import '../screens/all_listings_screen.dart';
 import '../models/product.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class AllListingsItem extends StatelessWidget {
   final String id;
   final String title;
@@ -16,6 +18,13 @@ class AllListingsItem extends StatelessWidget {
     @required this.price,
     @required this.imageUrl,
   });
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  CollectionReference allListingsItem =
+        FirebaseFirestore.instance.collection('All Listings Item');
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +62,11 @@ class AllListingsItem extends StatelessWidget {
                               Navigator.of(context).pushNamed(
                                 AllListingsDetailScreen.routeName,
                                 arguments: Product(
-                                  id: 'abc',
-                                  title: 'hoodie',
+                                  id: allListingsItem.id,
+                                  title: 'title',
                                   description:
                                       'good quality, adkjhgbvf hjvjbf kdjhbjv fkdgcan i ne er  i lain',
-                                  price: 100.00,
+                                  price: 100,
                                   imageUrl:
                                       'https://curtsy-parse-files.s3-us-west-2.amazonaws.com/34f605708cd1d1638492d4d433caa906_photo.jpeg',
                                 ),

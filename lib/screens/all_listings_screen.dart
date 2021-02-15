@@ -54,7 +54,6 @@ class AllListingsScreen extends StatelessWidget {
         ),
       ),
       drawer: MainDrawer(),
-      //body: Text('${args['data']}'),
 
       body: Container(
         height: 800,
