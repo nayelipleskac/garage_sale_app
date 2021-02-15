@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/all_listings_detail_screen.dart';
 import '../screens/all_listings_screen.dart';
+import '../models/product.dart';
 
 class AllListingsItem extends StatelessWidget {
   final String id;
@@ -49,8 +50,18 @@ class AllListingsItem extends StatelessWidget {
                           IconButton(
                             icon: Icon(Icons.arrow_forward),
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(AllListingsDetailScreen.routeName);
+                              Navigator.of(context).pushNamed(
+                                AllListingsDetailScreen.routeName,
+                                arguments: Product(
+                                  id: 'abc',
+                                  title: 'hoodie',
+                                  description:
+                                      'good quality, adkjhgbvf hjvjbf kdjhbjv fkdgcan i ne er  i lain',
+                                  price: 100.00,
+                                  imageUrl:
+                                      'https://curtsy-parse-files.s3-us-west-2.amazonaws.com/34f605708cd1d1638492d4d433caa906_photo.jpeg',
+                                ),
+                              );
                             },
                           ),
                         ],
