@@ -80,6 +80,7 @@ class AllListingsScreen extends StatelessWidget {
                   child: AllListingsItem(
                     id: allListingsDoc.id,
                     title: allListingsDoc['title'],
+                    description: allListingsDoc['description'],
                     price: allListingsDoc['price'].toDouble(),
                     imageUrl: allListingsDoc['imageUrl'],
                   ),

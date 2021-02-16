@@ -7,12 +7,14 @@ import '../models/product.dart';
 class AllListingsItem extends StatelessWidget {
   final String id;
   final String title;
+  final String description;
   final double price;
   final String imageUrl;
 
   AllListingsItem({
     @required this.id,
     @required this.title,
+    @required this.description,
     @required this.price,
     @required this.imageUrl,
   });
@@ -53,7 +55,7 @@ class AllListingsItem extends StatelessWidget {
                               arguments: Product(
                                 id: id,
                                 title: title,
-                                description: 'description',
+                                description: description,
                                 price: price,
                                 imageUrl: imageUrl,
                               ),

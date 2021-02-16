@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 
-
 class ProductItem extends StatefulWidget {
   final String id;
   final String title;
   final String description;
   final double price;
-  
 
   ProductItem(
     this.id,
     this.title,
     this.description,
     this.price,
-    
   );
 
   @override
