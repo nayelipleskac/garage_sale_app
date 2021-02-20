@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/cart_screen.dart';
 
 import '../models/product.dart';
 
@@ -11,10 +12,22 @@ class AllListingsDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          FlatButton(
+            child: Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
+            },
+          ),
+        ],
         title: Text(
           'Detail Screen${': ' + args.title}',
           style: TextStyle(fontSize: 25, fontFamily: 'Lato-Light'),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -43,6 +56,7 @@ class AllListingsDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Divider(),
             Text(
               '\$${args.price.toString()}',
               style: TextStyle(fontSize: 35),
@@ -54,6 +68,7 @@ class AllListingsDetailScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 25),
               ),
             ),
+            Divider(),
           ],
         ),
       ),

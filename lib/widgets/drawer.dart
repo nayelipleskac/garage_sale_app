@@ -34,7 +34,10 @@ class MainDrawer extends StatelessWidget {
             child: Text(
               'Thrifty Garage',
               style: TextStyle(
-                  fontSize: 30, fontWeight: FontWeight.bold, fontFamily: ''),
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Lato-Light',
+              ),
             ),
           ),
           buildListTile('My Items', Icons.shopping_bag, () {

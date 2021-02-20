@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
               ),
               bodyText2: TextStyle(
                 color: Color.fromRGBO(20, 51, 52, 1),
-                fontSize: 30,
+                fontSize: 25,
               ),
               headline6: TextStyle(
                 fontSize: 20,

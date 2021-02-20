@@ -45,22 +45,28 @@ class AllListingsItem extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(title),
-                        Text('\$$price'),
-                        IconButton(
-                          icon: Icon(Icons.arrow_forward),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(
-                              AllListingsDetailScreen.routeName,
-                              arguments: Product(
-                                id: id,
-                                title: title,
-                                description: description,
-                                price: price,
-                                imageUrl: imageUrl,
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(title),
+                              Text('\$$price'),
+                              IconButton(
+                                icon: Icon(Icons.arrow_forward),
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed(
+                                    AllListingsDetailScreen.routeName,
+                                    arguments: Product(
+                                      id: id,
+                                      title: title,
+                                      description: description,
+                                      price: price,
+                                      imageUrl: imageUrl,
+                                    ),
+                                  );
+                                },
                               ),
-                            );
-                          },
+                            ],
+                          ),
                         ),
                       ],
                     ),

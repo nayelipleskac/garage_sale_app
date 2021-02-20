@@ -59,6 +59,7 @@ class AllListingsScreen extends StatelessWidget {
             fontFamily: 'Lato-Light',
           ),
         ),
+        centerTitle: true,
       ),
       drawer: MainDrawer(),
       body: StreamBuilder<QuerySnapshot>(
