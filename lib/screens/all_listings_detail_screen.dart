@@ -19,7 +19,7 @@ class AllListingsDetailScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
+              Navigator.of(context).pushNamed(CartScreen.routeName);
             },
           ),
         ],

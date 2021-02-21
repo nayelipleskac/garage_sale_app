@@ -49,6 +49,107 @@ class CartScreen extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
+          Container(
+            color: Colors.green,
+            height: 200,
+            child: Card(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    // width: MediaQuery.of(context).size.width * 0.5,
+                    // alignment: Alignment.centerLeft,
+                    child: Image.network(
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpxM8xEIxBWslbwwR257jXndlRYUXpzynwOSRt4gipamoxcJSFUo6bIUAmZaWa6D5RinwYsV1W&usqp=CAc',
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    // width: MediaQuery.of(context).size.width * 0.5,
+                    // color: Colors.blue,
+                    child: SafeArea(
+                      child: Container(
+                        // padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Expanded(
+                            // flex: 1,
+                            Text(
+                              'planffffffffffffffffffffffffffrsetsdtestsdffffft 1',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                            // ),
+                            // Expanded(
+                            // flex: 1,
+                            Text(
+                              '25',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Container(
+            height: 200,
+            child: Card(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    // width: MediaQuery.of(context).size.width * 0.5,
+                    // alignment: Alignment.centerLeft,
+                    child: Container(
+                      child: Image.network(
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp4ozPGKdqIv3ilO9f8QYB5kFzOAWA3-LK5A&usqp=CAU',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    // width: MediaQuery.of(context).size.width * 0.5,
+                    // color: Colors.blue,
+                    child: SafeArea(
+                      child: Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'planffffffffffffffffffffffffffrsetsdtestsdffffft 1',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                            Text(
+                              '25',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp4ozPGKdqIv3ilO9f8QYB5kFzOAWA3-LK5A&usqp=CAU
           //ListView.builder(),
         ],
       ),

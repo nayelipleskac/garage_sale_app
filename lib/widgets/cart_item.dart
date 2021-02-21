@@ -6,7 +6,10 @@ class CartItem extends StatelessWidget {
     return Card(
       margin: EdgeInsets.all(10),
       child: Row(
-        children: [],
+        children: [
+          Image.network(
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrMGW9uwPwquAJVCsVfUOOTUQyH-Rl3xYEHkJwSStxkAC4YlHxngCHgkdWyzJ9JlV4RzMUr7ifeg&usqp=CAc')
+        ],
       ),
     );
   }
