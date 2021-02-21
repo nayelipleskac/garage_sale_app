@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/drawer.dart';
+import '../models/product.dart';
 
 class CartScreen extends StatelessWidget {
+  final String id;
+  final String title;
+  final double price;
+  final String imageUrl;
+
+  CartScreen({
+    @required this.id,
+    @required this.title,
+    @required this.price,
+    @required this.imageUrl,
+  });
   static const routeName = '/cart-screen';
   @override
   Widget build(BuildContext context) {
+    final Product args = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -20,137 +34,67 @@ class CartScreen extends StatelessWidget {
       drawer: MainDrawer(),
       body: Column(
         children: [
-          Card(
-            margin: EdgeInsets.all(15),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
+          SizedBox(
+            height: 50,
+          ),
+          Container(
+            height: 200,
+            child: Card(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Total Amount: ',
-                    style: TextStyle(fontSize: 30),
+                  Expanded(
+                    flex: 1,
+                    // does the same thing as media query
+                    // width: MediaQuery.of(context).size.width * 0.5,
+                    child: Image.network(
+                      args.imageUrl,
+                      // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpxM8xEIxBWslbwwR257jXndlRYUXpzynwOSRt4gipamoxcJSFUo6bIUAmZaWa6D5RinwYsV1W&usqp=CAc',
+                    ),
                   ),
-                  Spacer(),
-                  Chip(
-                    label: Text(
-                      '35.99',
-                      style: TextStyle(
-                        color:
-                            Theme.of(context).primaryTextTheme.headline6.color,
+                  Expanded(
+                    flex: 1,
+                    child: SafeArea(
+                      child: Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              args.title,
+                              // 'baby succulent',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                            Text(
+                              '\$${args.price.toString()}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    backgroundColor: Theme.of(context).primaryColor,
                   ),
                 ],
               ),
             ),
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
           Container(
-            color: Colors.green,
-            height: 200,
-            child: Card(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    // width: MediaQuery.of(context).size.width * 0.5,
-                    // alignment: Alignment.centerLeft,
-                    child: Image.network(
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpxM8xEIxBWslbwwR257jXndlRYUXpzynwOSRt4gipamoxcJSFUo6bIUAmZaWa6D5RinwYsV1W&usqp=CAc',
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    // width: MediaQuery.of(context).size.width * 0.5,
-                    // color: Colors.blue,
-                    child: SafeArea(
-                      child: Container(
-                        // padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Expanded(
-                            // flex: 1,
-                            Text(
-                              'planffffffffffffffffffffffffffrsetsdtestsdffffft 1',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                            ),
-                            // ),
-                            // Expanded(
-                            // flex: 1,
-                            Text(
-                              '25',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            width: 350,
+            child: RaisedButton(
+              color: Theme.of(context).primaryColor,
+              onPressed: () {},
+              child: Text(
+                'Checkout',
+                style: TextStyle(fontSize: 15),
               ),
             ),
           ),
-
-          Container(
-            height: 200,
-            child: Card(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    // width: MediaQuery.of(context).size.width * 0.5,
-                    // alignment: Alignment.centerLeft,
-                    child: Container(
-                      child: Image.network(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp4ozPGKdqIv3ilO9f8QYB5kFzOAWA3-LK5A&usqp=CAU',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    // width: MediaQuery.of(context).size.width * 0.5,
-                    // color: Colors.blue,
-                    child: SafeArea(
-                      child: Container(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'planffffffffffffffffffffffffffrsetsdtestsdffffft 1',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                            ),
-                            Text(
-                              '25',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp4ozPGKdqIv3ilO9f8QYB5kFzOAWA3-LK5A&usqp=CAU
-          //ListView.builder(),
         ],
       ),
     );
