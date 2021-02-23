@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../models/product.dart';
+import '../models/product.dart';
+
 class CartItem extends StatelessWidget {
   final String id;
   final String title;
@@ -12,13 +15,14 @@ class CartItem extends StatelessWidget {
     @required this.price,
     @required this.imageUrl,
   });
+
+
   @override
   Widget build(BuildContext context) {
+    final Product args = ModalRoute.of(context).settings.arguments;
+
     return Column(
       children: [
-        SizedBox(
-          height: 50,
-        ),
         Container(
           height: 200,
           child: Card(
@@ -29,9 +33,9 @@ class CartItem extends StatelessWidget {
                   // does the same thing as media query
                   // width: MediaQuery.of(context).size.width * 0.5,
                   child: Image.network(
-                    imageUrl,
-                      // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpxM8xEIxBWslbwwR257jXndlRYUXpzynwOSRt4gipamoxcJSFUo6bIUAmZaWa6D5RinwYsV1W&usqp=CAc',
-                      ),
+                    args.imageUrl,
+                    // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpxM8xEIxBWslbwwR257jXndlRYUXpzynwOSRt4gipamoxcJSFUo6bIUAmZaWa6D5RinwYsV1W&usqp=CAc',
+                  ),
                 ),
                 Expanded(
                   flex: 1,
@@ -43,13 +47,13 @@ class CartItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            title,
+                            args.title,
                             // 'baby succulent',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           Text(
-                            '\$$price',
+                            '\$${args.price}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -64,7 +68,35 @@ class CartItem extends StatelessWidget {
           ),
         ),
         SizedBox(
+          height: 50,
+        ),
+        SizedBox(
           height: 10,
+        ),
+        Card(
+          margin: EdgeInsets.all(15),
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total:',
+                  style: TextStyle(fontSize: 25),
+                ),
+                Spacer(),
+                Chip(
+                  label: Text(
+                    '\$${26}',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryTextTheme.headline6.color,
+                    ),
+                  ),
+                  backgroundColor: Theme.of(context).primaryColor,
+                ),
+              ],
+            ),
+          ),
         ),
         Container(
           width: 350,
@@ -77,6 +109,10 @@ class CartItem extends StatelessWidget {
             ),
           ),
         ),
+        // ListView.builder(
+        //   itemBuilder: (ctx, i) =>
+        //       CartItem(id: null, title: null, price: null, imageUrl: null),
+        // ),
       ],
     );
   }

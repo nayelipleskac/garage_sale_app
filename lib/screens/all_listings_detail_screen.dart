@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
-import '../screens/cart_screen.dart';
 
+import '../screens/cart_screen.dart';
 import '../models/product.dart';
 
 class AllListingsDetailScreen extends StatelessWidget {
   static const routeName = '/all-listings-detail-screen';
+
+  final String id;
+  final String title;
+  final double price;
+  final String imageUrl;
+
+  AllListingsDetailScreen({
+    @required this.id,
+    @required this.title,
+    @required this.price,
+    @required this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +33,13 @@ class AllListingsDetailScreen extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushNamed(
                 CartScreen.routeName,
-                arguments: Product(id: id, title: null, description: null, price: null, imageUrl: null)
+                arguments: Product(
+                  id: id,
+                  title: title,
+                  description: '',
+                  price: price,
+                  imageUrl: imageUrl,
+                ),
               );
             },
           ),
