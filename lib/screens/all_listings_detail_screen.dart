@@ -39,6 +39,7 @@ class AllListingsDetailScreen extends StatelessWidget {
                   description: '',
                   price: price,
                   imageUrl: imageUrl,
+                  isInCart: true,
                 ),
               );
             },

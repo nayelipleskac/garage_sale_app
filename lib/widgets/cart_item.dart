@@ -8,14 +8,15 @@ class CartItem extends StatelessWidget {
   final String title;
   final double price;
   final String imageUrl;
+  final bool isInCart;
 
   CartItem({
     @required this.id,
     @required this.title,
     @required this.price,
     @required this.imageUrl,
+    @required this.isInCart,
   });
-
 
   @override
   Widget build(BuildContext context) {

@@ -61,6 +61,7 @@ class AllListingsItem extends StatelessWidget {
                                       description: description,
                                       price: price,
                                       imageUrl: imageUrl,
+                                      isInCart: '';
                                     ),
                                   );
                                 },
