@@ -20,8 +20,6 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Product args = ModalRoute.of(context).settings.arguments;
-
     return Column(
       children: [
         Container(
@@ -34,7 +32,8 @@ class CartItem extends StatelessWidget {
                   // does the same thing as media query
                   // width: MediaQuery.of(context).size.width * 0.5,
                   child: Image.network(
-                    args.imageUrl,
+                    imageUrl,
+                    fit: BoxFit.cover,
                     // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpxM8xEIxBWslbwwR257jXndlRYUXpzynwOSRt4gipamoxcJSFUo6bIUAmZaWa6D5RinwYsV1W&usqp=CAc',
                   ),
                 ),
@@ -48,13 +47,13 @@ class CartItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            args.title,
+                            title,
                             // 'baby succulent',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           Text(
-                            '\$${args.price}',
+                            '\$$price',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -68,52 +67,6 @@ class CartItem extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: 50,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Card(
-          margin: EdgeInsets.all(15),
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Total:',
-                  style: TextStyle(fontSize: 25),
-                ),
-                Spacer(),
-                Chip(
-                  label: Text(
-                    '\$${26}',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryTextTheme.headline6.color,
-                    ),
-                  ),
-                  backgroundColor: Theme.of(context).primaryColor,
-                ),
-              ],
-            ),
-          ),
-        ),
-        Container(
-          width: 350,
-          child: RaisedButton(
-            color: Theme.of(context).primaryColor,
-            onPressed: () {},
-            child: Text(
-              'Checkout',
-              style: TextStyle(fontSize: 15),
-            ),
-          ),
-        ),
-        // ListView.builder(
-        //   itemBuilder: (ctx, i) =>
-        //       CartItem(id: null, title: null, price: null, imageUrl: null),
-        // ),
       ],
     );
   }
