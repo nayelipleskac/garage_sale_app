@@ -78,9 +78,6 @@ class CartScreen extends StatelessWidget {
                   ),
                 );
               }),
-          // SizedBox(
-          //   height: 10,
-          // ),
           Expanded(
             flex: 2,
             child: Column(

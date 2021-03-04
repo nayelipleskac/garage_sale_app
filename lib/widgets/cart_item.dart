@@ -19,7 +19,7 @@ class CartItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextall) {
     return Column(
       children: [
         Container(

@@ -6,18 +6,6 @@ import '../models/product.dart';
 class AllListingsDetailScreen extends StatelessWidget {
   static const routeName = '/all-listings-detail-screen';
 
-  final String id;
-  final String title;
-  final double price;
-  final String imageUrl;
-
-  AllListingsDetailScreen({
-    @required this.id,
-    @required this.title,
-    @required this.price,
-    @required this.imageUrl,
-  });
-
   @override
   Widget build(BuildContext context) {
     final Product args = ModalRoute.of(context).settings.arguments;
@@ -33,30 +21,23 @@ class AllListingsDetailScreen extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushNamed(
                 CartScreen.routeName,
-                arguments: Product(
-                  id: id,
-                  title: title,
-                  description: '',
-                  price: price,
-                  imageUrl: imageUrl,
-                  isInCart: true,
-                ),
+                // arguments: Product(),
               );
             },
           ),
         ],
         title: Text(
           'Detail Screen${': ' + args.title}',
-          style: TextStyle(fontSize: 25, fontFamily: 'Lato-Light'),
+          style: TextStyle(fontSize: 22, fontFamily: 'Lato-Light'),
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: SingleChildScrollView(    
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(15),      
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(25),
