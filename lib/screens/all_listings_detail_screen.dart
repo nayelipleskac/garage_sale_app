@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../screens/cart_screen.dart';
 import '../models/product.dart';
 
 class AllListingsDetailScreen extends StatelessWidget {
   static const routeName = '/all-listings-detail-screen';
+
+  CollectionReference allListingsItem =
+      FirebaseFirestore.instance.collection('All Listings Item');
+
+  Future<void> updateDoc() {
+    return allListingsItem
+        .doc('2Y9JG6ZrdZyPC4GMzQej')
+        .update({'isInCart': true}).catchError(
+            (error) => print('failed to update doc on firebase: $error'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +29,8 @@ class AllListingsDetailScreen extends StatelessWidget {
               Icons.shopping_cart,
               color: Colors.white,
             ),
-            onPressed: () {
+            onPressed: () async {
+              await updateDoc();
               Navigator.of(context).pushNamed(
                 CartScreen.routeName,
                 // arguments: Product(),
@@ -32,12 +44,12 @@ class AllListingsDetailScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(    
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.all(15),      
+              padding: EdgeInsets.all(15),
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(25),

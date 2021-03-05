@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../widgets/drawer.dart';
-import '../models/product.dart';
 import '../widgets/cart_item.dart';
 
 class CartScreen extends StatelessWidget {
@@ -21,6 +20,18 @@ class CartScreen extends StatelessWidget {
   });
   static const routeName = '/cart-screen';
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // CollectionReference allListingsItem =
+  //     FirebaseFirestore.instance.collection('All Listings Item');
+
+  // Future<void> updateDoc() {
+  //   return allListingsItem
+  //       .doc('2Y9JG6ZrdZyPC4GMzQej')
+  //       .update({'isInCart': true})
+  //       .then((value) => print('cart and firebase updated'))
+  //       .catchError(
+  //           (error) => print('failed to update doc on firebase: $error'));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +53,25 @@ class CartScreen extends StatelessWidget {
         children: [
           SizedBox(
             height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: _firestore
+                      .collection('All Listings Item')
+                      .where('isInCart', isEqualTo: true)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    int totalItemCount = snapshot.data.docs.length;
+                    return Text(
+                      totalItemCount.toString() + ' items',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    );
+                  }),
+            ),
           ),
           StreamBuilder<QuerySnapshot>(
               stream: _firestore
@@ -96,7 +126,7 @@ class CartScreen extends StatelessWidget {
                         Spacer(),
                         Chip(
                           label: Text(
-                            '\$${26}',
+                            '\$${56}',
                             style: TextStyle(
                               color: Theme.of(context)
                                   .primaryTextTheme
