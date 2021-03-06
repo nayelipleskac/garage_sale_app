@@ -34,7 +34,6 @@ class AllListingsItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    color: Colors.red,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.network(
