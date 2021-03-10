@@ -53,7 +53,7 @@ class CartItem extends StatelessWidget {
                             maxLines: 1,
                           ),
                           Text(
-                            '\$$price',
+                            '\$${price.toStringAsFixed(2)}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),

@@ -30,7 +30,7 @@ class _CartScreenState extends State<CartScreen> {
   CollectionReference allListingsItem =
       FirebaseFirestore.instance.collection('All Listings Item');
 
-  double totalAmount = 3000;
+  double totalAmount = 0;
 
   Future<double> getTotalAmount() async {
     var query = await allListingsItem
@@ -43,8 +43,12 @@ class _CartScreenState extends State<CartScreen> {
     //price within it
 
     //query.size = query.docs.length
+//
+
     for (int i = 0; i < query.size; i++) {
-      total += query.docs[i]['price'];
+      if (query.docs[i]['isInCart'] == true) {
+        total += query.docs[i]['price'];
+      }
     }
     return total;
   }
@@ -52,7 +56,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
 
   //setState is when the app rebuilds and it needs to be rebuilded in order to update the screen. same concept for a statefull widget
-  //will manually update the screen with the setstate to the correct value - 148 - not 3000, which is the 
+  //will manually update the screen with the setstate to the correct value - 148 - not 3000, which is the
   void initState() {
     print(
         'LASDLJKFCLKJLFKJDFLGJKFLKJVLFKJVNJDFL;SDKFJGLKSJNKJLKDFSJ SD GSLK GSDLKFJG SDFLK;G');
@@ -176,7 +180,7 @@ class _CartScreenState extends State<CartScreen> {
                             Spacer(),
                             Chip(
                               label: Text(
-                                '\$$totalAmount',
+                                '\$${totalAmount.toStringAsFixed(2)}',
                                 style: TextStyle(
                                   color: Theme.of(context)
                                       .primaryTextTheme
@@ -190,7 +194,7 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       ),
                     ),
-                    Text(getTotalAmount().toString()),
+                    // Text(getTotalAmount().toString()),
                     Container(
                       width: 350,
                       child: RaisedButton(
