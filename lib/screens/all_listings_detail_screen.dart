@@ -10,12 +10,15 @@ class AllListingsDetailScreen extends StatelessWidget {
   CollectionReference allListingsItem =
       FirebaseFirestore.instance.collection('All Listings Item');
 
-  Future<void> updateDoc() {
-    return allListingsItem
-        .doc('2Y9JG6ZrdZyPC4GMzQej')
-        .update({'isInCart': true}).catchError(
-            (error) => print('failed to update doc on firebase: $error'));
+//writes to firestore and changes the value of isInCart from false to true
+//allows the item to be put in the cart
+
+  Future<void> updateDoc(String id) {
+    return allListingsItem.doc(id).update({'isInCart': true}).catchError(
+        (error) => print('failed to update doc on firebase: $error'));
   }
+
+  String feedback = '';
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,16 @@ class AllListingsDetailScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () async {
-              await updateDoc();
+              if (args.isInCart == true) {
+                feedback = 'hey, i think you already entered this item to the cart!';
+                // return Center(
+                //   child: Text(
+                //     // 'this item is already in the cart! go back to shopping',
+                //   ),
+                // );
+                print('THIS item is already in the cart!!');
+              }
+              await updateDoc(args.id);
               Navigator.of(context).pushNamed(
                 CartScreen.routeName,
                 // arguments: Product(),

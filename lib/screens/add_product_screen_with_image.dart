@@ -93,7 +93,7 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
         'title': enteredTitle,
         'price': enteredPrice,
         'description': enteredDescription,
-        'url': 'downloadedUrl',
+        'url': imgFile.path,
       },
     );
   }

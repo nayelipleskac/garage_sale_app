@@ -42,7 +42,7 @@ class ProductOverviewScreen extends StatelessWidget {
                 snapshot.error.toString(),
               );
             }
-            
+
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Text('Loading...');
             }
@@ -56,7 +56,7 @@ class ProductOverviewScreen extends StatelessWidget {
                   prodDoc['title'],
                   prodDoc['description'].toString(),
                   prodDoc['price'].toDouble(),
-                  //prodDoc['imageUrl'],
+                  prodDoc['url'],
                 );
               },
             );

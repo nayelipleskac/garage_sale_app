@@ -43,7 +43,9 @@ class _CartScreenState extends State<CartScreen> {
     //price within it
 
     //query.size = query.docs.length
-//
+
+
+//checking so not every doc's price gets added up    
 
     for (int i = 0; i < query.size; i++) {
       if (query.docs[i]['isInCart'] == true) {
@@ -105,6 +107,9 @@ class _CartScreenState extends State<CartScreen> {
                         .where('isInCart', isEqualTo: true)
                         .snapshots(),
                     builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                      // if(_firestore.collection('All Listings Item').where('isInCart', isEqualTo: true).snapshots() == true {
+                      //     print('');
+                      // }
                       if (snapshot.data.size == 0) {
                         print('SNAPSHOT.data.docs == null');
                       }

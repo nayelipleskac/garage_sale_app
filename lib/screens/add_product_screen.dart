@@ -56,6 +56,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         'title': enteredTitle,
         'price': enteredPrice,
         'description': enteredDescription,
+        
       },
     );
   }
