@@ -4,21 +4,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../screens/cart_screen.dart';
 import '../models/product.dart';
 
-class AllListingsDetailScreen extends StatelessWidget {
+class AllListingsDetailScreen extends StatefulWidget {
   static const routeName = '/all-listings-detail-screen';
 
+  @override
+  _AllListingsDetailScreenState createState() => _AllListingsDetailScreenState();
+}
+
+class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
   CollectionReference allListingsItem =
       FirebaseFirestore.instance.collection('All Listings Item');
-
-//writes to firestore and changes the value of isInCart from false to true
-//allows the item to be put in the cart
 
   Future<void> updateDoc(String id) {
     return allListingsItem.doc(id).update({'isInCart': true}).catchError(
         (error) => print('failed to update doc on firebase: $error'));
   }
 
-  String feedback = '';
+  Future<void> submitToCart() async {
+      String feedback = '';
+    if (args.isInCart == true) {
+      feedback = 'hey, i think you already entered this item to the cart!';
+
+      print(feedback);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +42,6 @@ class AllListingsDetailScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () async {
-              if (args.isInCart == true) {
-                feedback = 'hey, i think you already entered this item to the cart!';
-                // return Center(
-                //   child: Text(
-                //     // 'this item is already in the cart! go back to shopping',
-                //   ),
-                // );
-                print('THIS item is already in the cart!!');
-              }
               await updateDoc(args.id);
               Navigator.of(context).pushNamed(
                 CartScreen.routeName,
@@ -60,6 +60,12 @@ class AllListingsDetailScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Center(
+              child: Text(
+                feedback,
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.all(15),
             ),
