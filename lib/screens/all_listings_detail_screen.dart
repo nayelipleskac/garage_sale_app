@@ -27,26 +27,26 @@ class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
         (error) => print('failed to update doc on firebase: $error'));
   }
 
-  Future<void> submitToCart(isInCart, id) async {
-    // if (isInCart == true)
-    //already stated
-    if (isInCart) {
-      print('success is false');
-      setState(() {
-        success = false;
-        feedback = 'hey, i think you already entered this item to the cart!';
-      });
-    }
-    success = true;
-    print('success is true');
-    updateDoc(id);
-    Navigator.of(context).pushNamed(
-      CartScreen.routeName,
-    );
-    // check if its in the cart
-    // if true : add to cart and push screen
-    // if false : display the popup (look up how to do it)
-  }
+  // Future<void> submitToCart(isInCart, id) async {
+  //   // if (isInCart == true)
+  //   //already stated
+  //   if (isInCart) {
+  //     print('success is false');
+  //     setState(() {
+  //       success = false;
+  //       feedback = 'hey, i think you already entered this item to the cart!';
+  //     });
+  //   }
+  //   success = true;
+  //   print('success is true');
+  //   updateDoc(id);
+  //   Navigator.of(context).pushNamed(
+  //     CartScreen.routeName,
+  //   );
+  //   // check if its in the cart
+  //   // if true : add to cart and push screen
+  //   // if false : display the popup (look up how to do it)
+  // }
 
 //the original onpressed function
 // to be excuted after submit ot cart ahs finished
@@ -57,6 +57,8 @@ class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
 
   //             );
   //           },
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +72,20 @@ class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
                 Icons.shopping_cart,
                 color: Colors.white,
               ),
-              onPressed: () async {
-                if (success = false) {
-                  print('success is false');
-                  await submitToCart(args.isInCart, args.id);
-                }
-              }),
+           onPressed: () async {
+              await updateDoc(args.id);
+              Navigator.of(context).pushNamed(
+                CartScreen.routeName,
+
+              );
+            },
+
+              // onPressed: () async {
+              //   if (success = false) {
+              //     print('success is false');
+              //     await submitToCart(args.isInCart, args.id);
+              //   }
+  ),},),
         ],
         title: Text(
           'Detail Screen${': ' + args.title}',

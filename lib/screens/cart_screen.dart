@@ -5,19 +5,19 @@ import '../widgets/drawer.dart';
 import '../widgets/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
-  final String id;
-  final String title;
-  final double price;
-  final String imageUrl;
-  final bool isInCart;
+  // final String id;
+  // final String title;
+  // final double price;
+  // final String imageUrl;
+  // final bool isInCart;
 
-  CartScreen({
-    @required this.id,
-    @required this.title,
-    @required this.price,
-    @required this.imageUrl,
-    @required this.isInCart,
-  });
+  // CartScreen({
+  //   @required this.id,
+  //   @required this.title,
+  //   @required this.price,
+  //   @required this.imageUrl,
+  //   @required this.isInCart,
+  // });
   static const routeName = '/cart-screen';
 
   @override
