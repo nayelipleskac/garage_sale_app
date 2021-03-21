@@ -10,6 +10,7 @@ class AllListingsItem extends StatelessWidget {
   final String description;
   final double price;
   final String imageUrl;
+  final bool isInCart;
 
   AllListingsItem({
     @required this.id,
@@ -17,6 +18,7 @@ class AllListingsItem extends StatelessWidget {
     @required this.description,
     @required this.price,
     @required this.imageUrl,
+    @required this.isInCart,
   });
 
   @override
@@ -67,7 +69,7 @@ class AllListingsItem extends StatelessWidget {
                                 description: description,
                                 price: price,
                                 imageUrl: imageUrl,
-                                isInCart: true,
+                                isInCart: isInCart,
                               ),
                             );
                           },

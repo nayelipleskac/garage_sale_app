@@ -27,26 +27,32 @@ class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
         (error) => print('failed to update doc on firebase: $error'));
   }
 
-  // Future<void> submitToCart(isInCart, id) async {
-  //   // if (isInCart == true)
-  //   //already stated
-  //   if (isInCart) {
-  //     print('success is false');
-  //     setState(() {
-  //       success = false;
-  //       feedback = 'hey, i think you already entered this item to the cart!';
-  //     });
-  //   }
-  //   success = true;
-  //   print('success is true');
-  //   updateDoc(id);
-  //   Navigator.of(context).pushNamed(
-  //     CartScreen.routeName,
-  //   );
+  Future<void> submitToCart(isInCart) async {
+    // if (isInCart == true)
+    //already stated
+    if (isInCart == true) {
+      print(isInCart);
+      print('success is false');
+      setState(() {
+        success = false;
+        feedback = 'hey, i think you already entered this item to the cart!';
+      });
+    }
+    if (isInCart == false) {
+      print(isInCart);
+      success = true;
+      print('success is true');
+      // updateDoc(id);
+      // Navigator.of(context).pushNamed(
+      //   CartScreen.routeName,
+      // );
+    }
+
+    // updateDoc(id)
+  }
   //   // check if its in the cart
   //   // if true : add to cart and push screen
   //   // if false : display the popup (look up how to do it)
-  // }
 
 //the original onpressed function
 // to be excuted after submit ot cart ahs finished
@@ -58,8 +64,6 @@ class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
   //             );
   //           },
 
-
-
   @override
   Widget build(BuildContext context) {
     final Product args = ModalRoute.of(context).settings.arguments;
@@ -68,24 +72,39 @@ class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
       appBar: AppBar(
         actions: <Widget>[
           FlatButton(
-              child: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-              ),
-           onPressed: () async {
-              await updateDoc(args.id);
-              Navigator.of(context).pushNamed(
-                CartScreen.routeName,
-
-              );
+            child: Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
+            onPressed: () async {
+              if (success == false) {
+                print(args.isInCart);
+                print('SUCCESS = FALSE HERE IN THE ONPRESSED!');
+                await submitToCart(args.isInCart);
+              }
+              if (success == true) {
+                print(args.isInCart);
+                print('SUCCESS = TRUE IN THE ONPRESSES!');
+                await updateDoc(args.id);
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              }
+              // await updateDoc(args.id);
+              // Navigator.of(context).pushNamed(
+              //   CartScreen.routeName,
+              // );
             },
 
-              // onPressed: () async {
-              //   if (success = false) {
-              //     print('success is false');
-              //     await submitToCart(args.isInCart, args.id);
-              //   }
-  ),},),
+            //run normally - just the button going to the cart (success) - and then gradually with prints comment back in the functions,
+            //with the firebase to see if it really is the firebase.
+
+            //see if it works normally /, then do the updateDoc /, and then the submittocart gradually!
+
+            // onPressed: () async {
+            //   if (success = false) {
+            //     print('success is false');
+            //     await submitToCart(args.isInCart, args.id);
+            //   }
+          ),
         ],
         title: Text(
           'Detail Screen${': ' + args.title}',
@@ -98,9 +117,15 @@ class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Center(
-              child: Text(
-                feedback,
-                style: TextStyle(fontSize: 20),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  feedback,
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.red,
+                  ),
+                ),
               ),
             ),
             Padding(

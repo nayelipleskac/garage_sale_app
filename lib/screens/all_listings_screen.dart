@@ -84,6 +84,7 @@ class AllListingsScreen extends StatelessWidget {
                     description: allListingsDoc['description'],
                     price: allListingsDoc['price'].toDouble(),
                     imageUrl: allListingsDoc['imageUrl'],
+                    isInCart: allListingsDoc['isInCart'],
                   ),
                 );
               },
