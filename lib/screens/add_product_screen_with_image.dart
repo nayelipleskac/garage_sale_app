@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:new2u_project/screens/product_overview_screen.dart';
 
 class AddProductScreenWithImage extends StatefulWidget {
   static const routeName = '/add-product-with-image';
@@ -10,7 +11,7 @@ class AddProductScreenWithImage extends StatefulWidget {
   final XFile imgFile;
   AddProductScreenWithImage(this.imgFile);
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   _AddProductScreenWithImageState createState() =>
@@ -54,37 +55,33 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
     }
     print('success!!!');
     success = true;
-    Navigator.of(context).pushNamed('/');
+    // Navigator.of(context).pushNamed(ProductOverviewScreen.routeName);
   }
 
-  firebase_storage.FirebaseStorage storage =
-      firebase_storage.FirebaseStorage.instance;
-
-  firebase_storage.Reference ref =
-      firebase_storage.FirebaseStorage.instance.ref('/product_images');
-
-  Future<void> uploadFile(imgFile) async {
+  Future<void> uploadFile(XFile imgFile) async {
     File file = File(
       imgFile.path,
     );
-    try {
-      firebase_storage.TaskSnapshot task = await firebase_storage
-          .FirebaseStorage.instance
-          .ref('/product_images')
-          .putFile(file);
-
-      print(
-        'TASK: ' + task.toString(),
-      );
-    } catch (e) {
-      print('CANCELED' + e.toString());
-    }
-
-    // await storage.ref().child("product_images").putFile(file).getDownloadUrl();
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
 
     final enteredTitle = titleController.text;
     final enteredPrice = double.parse(priceController.text);
     final enteredDescription = descriptionController.text;
+
+    String downloadUrl = '';
+    String uniqueId = DateTime.now().toString();
+    try {
+      await storage.ref('/product_images/$uniqueId').putFile(file);
+
+      downloadUrl = await firebase_storage.FirebaseStorage.instance
+          .ref('/product_images/$uniqueId')
+          .getDownloadURL();
+      print('DOWNLOAD URL' + downloadUrl);
+      // give to firestore
+    } catch (e) {
+      print('ERROR:' + e);
+    }
 
     CollectionReference products =
         FirebaseFirestore.instance.collection('Products');
@@ -93,10 +90,48 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
         'title': enteredTitle,
         'price': enteredPrice,
         'description': enteredDescription,
-        'url': imgFile.path,
+        'url': downloadUrl,
       },
     );
   }
+
+  // Future<void> uploadFiletoFirebase(imgFile) async {
+  //   firebase_storage.Reference ref =
+  //       firebase_storage.FirebaseStorage.instance.ref('/product_images');
+
+  //   // firebase_storage.Reference uploadTask = ref.putFile(imgFile);
+
+  //   firebase_storage.UploadTask uploadTask = ref.putFile(imgFile);
+
+  //   var uploadFile = uploadTask.then((res) {
+  //     res.ref.getDownloadURL();
+  //   });
+
+  //   File file = File(
+  //     imgFile.path,
+  //   );
+
+  //   // var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+  //   try {
+  //     firebase_storage.TaskSnapshot task = await firebase_storage
+  //         .FirebaseStorage.instance
+  //         .ref('/product_images')
+  //         .putFile(file);
+
+  //     print(
+  //       'TASK: ' + task.toString(),
+  //     );
+  //   } catch (e) {
+  //     print('CANCELED' + e.toString());
+  //   }
+
+  //   firebase_storage.TaskSnapshot task = await firebase_storage
+  //       .FirebaseStorage.instance
+  //       .ref('/product_images')
+  //       .putFile(file);
+
+  //   // await storage.ref().child("product_images").putFile(file).getDownloadUrl();
+  // }
 
   Widget buildTextField(String labelText, TextEditingController controller) {
     return Padding(
@@ -199,12 +234,17 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
                 child: FlatButton(
                   onPressed: () async {
                     if (success == false) {
+                      print('SUCCESS IS FALSE');
                       await _submitData();
                     }
                     if (success == true) {
+                      Navigator.of(context)
+                          .pushNamed(ProductOverviewScreen.routeName);
                       await uploadFile(widget.imgFile);
-                      print('SUCCESS = TRUE');
                     }
+                    // if (success == true) {
+                    //   print('SUCCESS IS TRUE');
+                    // }
                   },
                   child: Text(
                     'Add Product',
