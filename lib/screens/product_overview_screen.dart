@@ -34,7 +34,10 @@ class ProductOverviewScreen extends StatelessWidget {
       ),
       drawer: MainDrawer(),
       body: StreamBuilder<QuerySnapshot>(
-          stream: _firestore.collection('Products').snapshots(),
+          stream: _firestore
+              .collection('Products')
+              .orderBy('date', descending: true)
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -57,6 +60,9 @@ class ProductOverviewScreen extends StatelessWidget {
                   prodDoc['description'].toString(),
                   prodDoc['price'].toDouble(),
                   prodDoc['url'],
+                  DateTime.parse(
+                    prodDoc['date'].toDate().toString(),
+                  ),
                 );
               },
             );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../screens/all_listings_detail_screen.dart';
 import '../screens/all_listings_screen.dart';
@@ -11,6 +12,7 @@ class AllListingsItem extends StatelessWidget {
   final double price;
   final String imageUrl;
   final bool isInCart;
+  final DateTime date;
 
   AllListingsItem({
     @required this.id,
@@ -19,6 +21,7 @@ class AllListingsItem extends StatelessWidget {
     @required this.price,
     @required this.imageUrl,
     @required this.isInCart,
+    @required this.date,
   });
 
   @override
@@ -57,7 +60,10 @@ class AllListingsItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
-                        Text('\$$price'),
+                        Text('\$${price.toStringAsFixed(2)}'),
+                        Text(
+                          DateFormat.yMMMd().format(date),
+                        ),
                         IconButton(
                           icon: Icon(Icons.arrow_forward),
                           onPressed: () {
@@ -70,6 +76,7 @@ class AllListingsItem extends StatelessWidget {
                                 price: price,
                                 imageUrl: imageUrl,
                                 isInCart: isInCart,
+                                date: date,
                               ),
                             );
                           },

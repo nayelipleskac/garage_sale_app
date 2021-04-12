@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ProductItem extends StatefulWidget {
   final String id;
@@ -6,6 +7,7 @@ class ProductItem extends StatefulWidget {
   final String description;
   final double price;
   final String url;
+  final DateTime date;
 
   ProductItem(
     this.id,
@@ -13,6 +15,7 @@ class ProductItem extends StatefulWidget {
     this.description,
     this.price,
     this.url,
+    this.date,
   );
 
   @override
@@ -50,7 +53,7 @@ class _ProductItemState extends State<ProductItem> {
                 ),
               ),
               Container(
-                child: Text('\$${widget.price}'),
+                child: Text('\$${widget.price.toStringAsFixed(2)}'),
               ),
               IconButton(
                 icon: Icon(
@@ -65,7 +68,15 @@ class _ProductItemState extends State<ProductItem> {
               if (_expanded)
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  child: Text(widget.description),
+                  child: Column(
+                    children: [
+                      Text(widget.description),
+                      Text(
+                        DateFormat.yMMMEd().format(widget.date),
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
+                  ),
                 ),
             ],
           ),

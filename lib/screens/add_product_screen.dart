@@ -17,6 +17,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   final descriptionController = TextEditingController();
 
+  DateTime selectedDate;
+
   String feedback = '';
 
   bool success = false;
@@ -24,7 +26,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Future<void> _submitData() async {
     if (titleController.text.isEmpty ||
         priceController.text.isEmpty ||
-        descriptionController.text.isEmpty) {
+        descriptionController.text.isEmpty ||
+        selectedDate == null) {
       print('one or more fields are empty');
 
       setState(() {
@@ -56,9 +59,25 @@ class _AddProductScreenState extends State<AddProductScreen> {
         'title': enteredTitle,
         'price': enteredPrice,
         'description': enteredDescription,
-        
+        'date': selectedDate,
       },
     );
+  }
+
+  void _presentDatePicker(BuildContext context) {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        selectedDate = pickedDate;
+      });
+    });
   }
 
   Widget buildTextField(
@@ -119,7 +138,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 },
                 iconSize: 30,
               ),
-              
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text('Add a title for your item:'),
@@ -152,6 +170,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
               buildTextField(
                 'Add a description',
                 descriptionController,
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  'Add a date:',
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: RaisedButton(
+                  onPressed: () => _presentDatePicker(context),
+                  color: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
+                  child: Text('choose date'),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),

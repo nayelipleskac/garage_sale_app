@@ -85,6 +85,8 @@ class AllListingsScreen extends StatelessWidget {
                     price: allListingsDoc['price'].toDouble(),
                     imageUrl: allListingsDoc['imageUrl'],
                     isInCart: allListingsDoc['isInCart'],
+                    date: DateTime.parse(allListingsDoc['date'].toDate().toString()),
+
                   ),
                 );
               },

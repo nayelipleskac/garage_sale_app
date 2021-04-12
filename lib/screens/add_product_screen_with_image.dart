@@ -3,7 +3,9 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:new2u_project/screens/product_overview_screen.dart';
+import 'package:intl/intl.dart';
+
+import './product_overview_screen.dart';
 
 class AddProductScreenWithImage extends StatefulWidget {
   static const routeName = '/add-product-with-image';
@@ -25,6 +27,8 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
 
   final descriptionController = TextEditingController();
 
+  DateTime selectedDate;
+
   String feedback = '';
 
   bool success = false;
@@ -36,7 +40,8 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
 
     if (enteredTitle.isEmpty ||
         enteredPrice.toString().isEmpty ||
-        enteredDescription.isEmpty) {
+        enteredDescription.isEmpty ||
+        selectedDate == null) {
       print('one or more fields are empty');
 
       setState(() {
@@ -55,7 +60,6 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
     }
     print('success!!!');
     success = true;
-    // Navigator.of(context).pushNamed(ProductOverviewScreen.routeName);
   }
 
   Future<void> uploadFile(XFile imgFile) async {
@@ -91,47 +95,26 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
         'price': enteredPrice,
         'description': enteredDescription,
         'url': downloadUrl,
+        'date': selectedDate,
       },
     );
   }
 
-  // Future<void> uploadFiletoFirebase(imgFile) async {
-  //   firebase_storage.Reference ref =
-  //       firebase_storage.FirebaseStorage.instance.ref('/product_images');
-
-  //   // firebase_storage.Reference uploadTask = ref.putFile(imgFile);
-
-  //   firebase_storage.UploadTask uploadTask = ref.putFile(imgFile);
-
-  //   var uploadFile = uploadTask.then((res) {
-  //     res.ref.getDownloadURL();
-  //   });
-
-  //   File file = File(
-  //     imgFile.path,
-  //   );
-
-  //   // var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
-  //   try {
-  //     firebase_storage.TaskSnapshot task = await firebase_storage
-  //         .FirebaseStorage.instance
-  //         .ref('/product_images')
-  //         .putFile(file);
-
-  //     print(
-  //       'TASK: ' + task.toString(),
-  //     );
-  //   } catch (e) {
-  //     print('CANCELED' + e.toString());
-  //   }
-
-  //   firebase_storage.TaskSnapshot task = await firebase_storage
-  //       .FirebaseStorage.instance
-  //       .ref('/product_images')
-  //       .putFile(file);
-
-  //   // await storage.ref().child("product_images").putFile(file).getDownloadUrl();
-  // }
+  void _presentDatePicker(BuildContext context) {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        selectedDate = pickedDate;
+      });
+    });
+  }
 
   Widget buildTextField(String labelText, TextEditingController controller) {
     return Padding(
@@ -228,6 +211,49 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
               buildTextField(
                 'Add a description',
                 descriptionController,
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  'Add a date',
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: RaisedButton(
+                  onPressed: () => _presentDatePicker(context),
+                  color: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
+                  child: Text('choose date'),
+                ),
+              ),
+              Container(
+                //height: MediaQuery.of(context).size.height * 0.4,
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'chosen date: ',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    selectedDate == null
+                        ? Text(
+                            ' No Date Chosen!',
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : Text(
+                            DateFormat.yMMMEd().format(selectedDate),
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                            ),
+                          ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),

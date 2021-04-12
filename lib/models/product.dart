@@ -7,6 +7,7 @@ class Product {
   final double price;
   final String imageUrl;
   final bool isInCart;
+  final DateTime date;
 
   Product({
     @required this.id,
@@ -15,5 +16,6 @@ class Product {
     @required this.price,
     @required this.imageUrl,
     @required this.isInCart,
+    @required this.date,
   });
 }
