@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
-
 import '../screens/cart_screen.dart';
 import '../models/product.dart';
-
 
 class AllListingsDetailScreen extends StatefulWidget {
   static const routeName = '/all-listings-detail-screen';
@@ -168,7 +166,7 @@ class _AllListingsDetailScreenState extends State<AllListingsDetailScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                DateFormat.yMMMd().format(widget.date),
+                DateFormat.yMMMd().format(args.date),
                 style: TextStyle(fontSize: 25),
               ),
             ),
