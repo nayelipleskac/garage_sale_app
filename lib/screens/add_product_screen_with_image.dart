@@ -220,10 +220,11 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
               ),
               Container(
                 margin: EdgeInsets.all(10),
-                child: RaisedButton(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.yellow),
+                  //style: TextStyle(color:  Theme.of(context).primaryColor,  textColor: Colors.white, ),
                   onPressed: () => _presentDatePicker(context),
-                  color: Theme.of(context).primaryColor,
-                  textColor: Colors.white,
+
                   child: Text('choose date'),
                 ),
               ),
