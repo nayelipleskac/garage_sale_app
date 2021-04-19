@@ -1,5 +1,8 @@
-import 'package:camera/camera.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+
+import 'package:camera/camera.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 
 
@@ -59,6 +62,7 @@ class MyApp extends StatelessWidget {
             AddProductScreenWithImage(imgFile),
         ProductOverviewScreen.routeName: (ctx) => ProductOverviewScreen(),
         AllListingsDetailScreen.routeName: (ctx) => AllListingsDetailScreen(),
+        // LoginScreen.routename: (ctx) => LoginScreen();
       },
     );
   }
