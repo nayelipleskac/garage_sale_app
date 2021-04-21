@@ -53,6 +53,9 @@ class LoginScreen extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Password'),
             ),
           ),
+          SizedBox(
+            height: 50,
+          ),
           Container(
             width: 300,
             child: ElevatedButton(
@@ -66,7 +69,22 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
-          FlatButton(onPressed: () {}, child: Text('google'))
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.g_translate,
+                  color: Colors.red,
+                ),
+                Text(
+                  '    Google Sign In',
+                  style: TextStyle(color: Colors.red, fontSize: 18),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
