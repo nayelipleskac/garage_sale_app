@@ -13,6 +13,7 @@ import './screens/cart_screen.dart';
 import './screens/take_picture_screen.dart';
 import './screens/product_overview_screen.dart';
 import './screens/add_product_screen_with_image.dart';
+import './screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
             AddProductScreenWithImage(imgFile),
         ProductOverviewScreen.routeName: (ctx) => ProductOverviewScreen(),
         AllListingsDetailScreen.routeName: (ctx) => AllListingsDetailScreen(),
-        // LoginScreen.routename: (ctx) => LoginScreen();
+        LoginScreen.routeName: (ctx) => LoginScreen(),
       },
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
-import 'package:new2u_project/screens/all_listings_screen.dart';
-import 'package:new2u_project/screens/cart_screen.dart';
-import 'package:new2u_project/screens/product_overview_screen.dart';
+
+import '../screens/all_listings_screen.dart';
+import '../screens/cart_screen.dart';
+import '../screens/product_overview_screen.dart';
+import '../screens/login_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
@@ -48,10 +49,10 @@ class MainDrawer extends StatelessWidget {
             Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
           }),
           buildListTile('All Listings', Icons.home, () {
-            Navigator.pushNamed(
-              context,
-              AllListingsScreen.routeName,
-            );
+            Navigator.pushNamed(context, AllListingsScreen.routeName);
+          }),
+          buildListTile('Login Page', Icons.login, () {
+            Navigator.pushNamed(context, LoginScreen.routeName);
           }),
         ],
       ),
