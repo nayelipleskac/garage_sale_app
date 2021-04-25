@@ -1,9 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 import '../widgets/drawer.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const routeName = '/login-screen';
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  // AuthMode _authMode = AuthMode.Login;
+  Map<String, String> _authData = {
+    'email': '',
+    'password': '',
+  };
+  
+  var _isLoading = false;
+  final emailAddressController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void _submit() {
+    if (!_formKey.currentState.validate()) {
+      //Invalid!
+      return;
+    }
+    _formKey.currentState.save();
+    setState(() {
+      _isLoading = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,15 +74,20 @@ class LoginScreen extends StatelessWidget {
             // color: Colors.red,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: TextField(
+              child: TextFormField(
+                controller: emailAddressController,
                 decoration: InputDecoration(labelText: 'Email Address'),
+                keyboardType: TextInputType.emailAddress,
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: TextField(
-              decoration: InputDecoration(labelText: 'Password'),
+              controller: passwordController,
+              decoration: InputDecoration(
+                labelText: 'Password',
+              ),
             ),
           ),
           SizedBox(
