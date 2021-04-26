@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
 import '../widgets/drawer.dart';
+import '../logic/auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login-screen';
@@ -16,12 +17,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   // AuthMode _authMode = AuthMode.Login;
+
   Map<String, String> _authData = {
     'email': '',
     'password': '',
   };
-  
+
   var _isLoading = false;
+
   final emailAddressController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -33,6 +36,24 @@ class _LoginScreenState extends State<LoginScreen> {
     _formKey.currentState.save();
     setState(() {
       _isLoading = true;
+    });
+
+    auth.authStateChanges().listen((User user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
+
+    // if (_authMode == AuthMode.Login) {
+    //   // Log user in
+    // } else {
+    //   // Sign user up
+    // }
+    //
+    setState(() {
+      _isLoading = false;
     });
   }
 
@@ -70,23 +91,48 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(
             height: 120,
           ),
-          Container(
-            // color: Colors.red,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextFormField(
-                controller: emailAddressController,
-                decoration: InputDecoration(labelText: 'Email Address'),
-                keyboardType: TextInputType.emailAddress,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
+          Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    // color: Colors.red,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: TextFormField(
+                        controller: emailAddressController,
+                        decoration: InputDecoration(labelText: 'Email Address'),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value.isEmpty || !value.contains('@')) {
+                            return 'Invalid email';
+                          }
+                        },
+                        onSaved: (value) {
+                          _authData['email'] = value;
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextFormField(
+                      controller: passwordController,
+                      decoration: InputDecoration(labelText: 'Password'),
+                      obscureText: true,
+                      validator: (value) {
+                        if (value.isEmpty || value.length < 5) {
+                          return 'Password is too short';
+                        }
+                      },
+                      onSaved: (value) {
+                        _authData['password'] = value;
+                      },
+                    ),
+                    // if authMode == AuthMode.Signup
+                  ),
+                ],
               ),
             ),
           ),
@@ -99,13 +145,16 @@ class _LoginScreenState extends State<LoginScreen> {
               style: ElevatedButton.styleFrom(
                 primary: Theme.of(context).primaryColor,
               ),
-              onPressed: () {},
+              onPressed: () async {
+                signUserIn(emailAddressController, passwordController);
+              },
               child: Text(
                 'Login',
                 style: TextStyle(fontSize: 15),
               ),
             ),
           ),
+          TextButton(onPressed: () {}, child: Text('Sign Up Here!')),
           TextButton(
             onPressed: () {},
             child: Row(
