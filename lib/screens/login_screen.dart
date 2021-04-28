@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import '../widgets/drawer.dart';
 import '../logic/auth.dart';
 
+enum AuthMode { Signup, Login }
+
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login-screen';
 
@@ -17,6 +19,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   // AuthMode _authMode = AuthMode.Login;
+  //
+
+  AuthMode _authMode = AuthMode.Login;
 
   Map<String, String> _authData = {
     'email': '',
@@ -24,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   };
 
   var _isLoading = false;
+  bool _signInMode = true;
 
   final emailAddressController = TextEditingController();
   final passwordController = TextEditingController();
@@ -46,34 +52,40 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
 
-    // if (_authMode == AuthMode.Login) {
-    //   // Log user in
-    // } else {
-    //   // Sign user up
-    // }
-    //
+    if (_authMode == AuthMode.Login) {
+      // Log user in
+    } else {
+      // Sign user up
+    }
+
     setState(() {
       _isLoading = false;
     });
   }
 
+  //swithing between the modes
+
+  void _switchAuthMode() {
+    if (_authMode == AuthMode.Login) {
+      setState(() {
+        _authMode = AuthMode.Signup;
+      });
+    } else {
+      setState(() {
+        _authMode = AuthMode.Login;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Login Page',
-          style: TextStyle(
-            fontFamily: 'Lato-Light',
-            fontSize: 25,
-          ),
-        ),
-        centerTitle: true,
-      ),
-      drawer: MainDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(
+            height: 60,
+          ),
           Padding(
             padding: const EdgeInsets.all(25.0),
             child: Container(
@@ -115,6 +127,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+
+                  if (_authMode == AuthMode.Signup)
+                    TextFormField(
+                      enabled: _authMode == AuthMode.Signup,
+                      decoration: InputDecoration(
+                        labelText: 'Comfirm Password',
+                      ),
+                      obscureText: true,
+                      validator: _authMode == AuthMode.Signup
+                          ? (value) {
+                              if (value != passwordController.text) {
+                                return 'Passwords do not match!';
+                              }
+                            }
+                          : null,
+                    ),
+
+                  //if the AuthMode _authMode = AuthMode.Login; is not used, then how am i supposed to know
+                  //if the useris logging in or signing up?
+                  //
+
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: TextFormField(
@@ -130,7 +163,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         _authData['password'] = value;
                       },
                     ),
-                    // if authMode == AuthMode.Signup
                   ),
                 ],
               ),
@@ -154,7 +186,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          TextButton(onPressed: () {}, child: Text('Sign Up Here!')),
+          TextButton(
+            onPressed: () {
+              AuthMode.Signup == true;
+            },
+            child: Text('Sign Up Here!'),
+          ),
           TextButton(
             onPressed: () {},
             child: Row(
