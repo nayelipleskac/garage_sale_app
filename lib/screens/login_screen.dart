@@ -2,24 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
-import '../widgets/drawer.dart';
 import '../logic/auth.dart';
 
 enum AuthMode { Signup, Login }
 
+Auth authFunctions = Auth();
+
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login-screen';
+
+// FirebaseAuth.instance
+//   .authStateChanges()
+//   .listen((User user) {
+//     if (user == null) {
+//       print('User is currently signed out!');
+//     } else {
+//       print('User is signed in!');
+//     }
+//   });
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   FirebaseAuth auth = FirebaseAuth.instance;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
-  // AuthMode _authMode = AuthMode.Login;
-  //
 
   AuthMode _authMode = AuthMode.Login;
 
@@ -29,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
   };
 
   var _isLoading = false;
-  bool _signInMode = true;
 
   final emailAddressController = TextEditingController();
   final passwordController = TextEditingController();
@@ -56,7 +65,11 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     if (_authMode == AuthMode.Login) {
-      // Log user in
+      // Sign user in
+      await signUserIn(
+        _authData['email'],
+        _authData['password'],
+      );
     } else {
       // Sign user up
       await signUserUp(
@@ -70,8 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  //swithing between the modes
-
+  //swithing between the mode
   void _switchAuthMode() {
     if (_authMode == AuthMode.Login) {
       setState(() {
