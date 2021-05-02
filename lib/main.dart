@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Thrifty Garage',
       theme: ThemeData(
-        primaryColor: Colors.amber,
-        accentColor: Colors.indigo,
+        primaryColor: Colors.purple,
+        accentColor: Colors.white,
         fontFamily: 'OpenSansCondensed',
         textTheme: ThemeData.light().textTheme.copyWith(
               bodyText1: TextStyle(

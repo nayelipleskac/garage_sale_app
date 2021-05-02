@@ -34,7 +34,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailAddressController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void _submit() {
+  Future<void> _submit() async {
+    // final enteredEmail = emailAddressController.text;
+    // final enteredPassword = passwordController.text;
+
     if (!_formKey.currentState.validate()) {
       //Invalid!
       return;
@@ -56,6 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
       // Log user in
     } else {
       // Sign user up
+      await signUserUp(
+        _authData['email'],
+        _authData['password'],
+      );
     }
 
     setState(() {
@@ -80,74 +87,54 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 60,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Container(
-              alignment: Alignment.center,
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  fontFamily: 'Lato-Light',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 45,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontFamily: 'Lato-Light',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 120,
-          ),
-          Form(
-            key: _formKey,
-            child: SingleChildScrollView(
+            SizedBox(
+              height: 70,
+            ),
+            Form(
+              key: _formKey,
               child: Column(
                 children: [
-                  Container(
-                    // color: Colors.red,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: TextFormField(
-                        controller: emailAddressController,
-                        decoration: InputDecoration(labelText: 'Email Address'),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value.isEmpty || !value.contains('@')) {
-                            return 'Invalid email';
-                          }
-                        },
-                        onSaved: (value) {
-                          _authData['email'] = value;
-                        },
-                      ),
+                  // the email address text field
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextFormField(
+                      controller: emailAddressController,
+                      decoration: InputDecoration(labelText: 'Email Address'),
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value.isEmpty || !value.contains('@')) {
+                          return 'Invalid email';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _authData['email'] = value;
+                      },
                     ),
                   ),
 
-                  if (_authMode == AuthMode.Signup)
-                    TextFormField(
-                      enabled: _authMode == AuthMode.Signup,
-                      decoration: InputDecoration(
-                        labelText: 'Comfirm Password',
-                      ),
-                      obscureText: true,
-                      validator: _authMode == AuthMode.Signup
-                          ? (value) {
-                              if (value != passwordController.text) {
-                                return 'Passwords do not match!';
-                              }
-                            }
-                          : null,
-                    ),
-
-                  //if the AuthMode _authMode = AuthMode.Login; is not used, then how am i supposed to know
-                  //if the useris logging in or signing up?
-                  //
-
+                  // the password text field
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: TextFormField(
@@ -158,57 +145,116 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (value.isEmpty || value.length < 5) {
                           return 'Password is too short';
                         }
+                        return null;
                       },
                       onSaved: (value) {
                         _authData['password'] = value;
                       },
                     ),
                   ),
+                  if (_authMode == AuthMode.Signup)
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: TextFormField(
+                        enabled: _authMode == AuthMode.Signup,
+                        decoration: InputDecoration(
+                          labelText: 'Confirm Password',
+                        ),
+                        obscureText: true,
+                        validator: _authMode == AuthMode.Signup
+                            ? (value) {
+                                if (value != passwordController.text) {
+                                  return 'Passwords do not match!';
+                                }
+                              }
+                            : null,
+                      ),
+                    ),
+                  SizedBox(
+                    height: 55,
+                  ),
+
+                  if (_isLoading == true)
+                    CircularProgressIndicator(
+                      backgroundColor: Theme.of(context).primaryColor,
+                    )
+                  else
+                    Container(
+                      width: 300,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).primaryColor),
+                        child: Text(
+                          _authMode == AuthMode.Login ? 'Login!' : 'Sign Up!',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        onPressed: _submit,
+                      ),
+                    ),
+                  TextButton(
+                    onPressed: _switchAuthMode,
+                    child: Text(
+                      '${_authMode == AuthMode.Login ? 'Sign Up' : 'Login'} Instead!',
+                      style: TextStyle(
+                          fontSize: 17, color: Theme.of(context).primaryColor),
+                    ),
+                  ),
+                  //the login button
+                  // Container(
+                  //   width: 300,
+                  //   child: ElevatedButton(
+                  //     style: ElevatedButton.styleFrom(
+                  //       primary: Theme.of(context).primaryColor,
+                  //     ),
+                  //     onPressed: () async {
+                  //       if (_authMode == AuthMode.Login) {
+                  //         signUserIn(
+                  //           emailAddressController,
+                  //           passwordController,
+                  //         );
+                  //       } else {
+                  //         signUserUp(
+                  //           emailAddressController,
+                  //           passwordController,
+                  //         );
+                  //       }
+                  //     },
+                  //     child: Text(
+                  //       'Login',
+                  //       style: TextStyle(fontSize: 15),
+                  //     ),
+                  //   ),
+                  // ),
+                  //
+                  // the sign up button
+                  // TextButton(
+                  //   onPressed: () {
+                  //     AuthMode.Signup == true;
+                  //   },
+                  //   child: Text('Sign Up Here!'),
+                  // ),
+                  // the google signin button
+                  // TextButton(
+                  //   onPressed: () {},
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Icon(
+                  //         Icons.g_translate,
+                  //         color: Colors.red,
+                  //       ),
+                  //       Text(
+                  //         '    Google Sign In',
+                  //         style: TextStyle(color: Colors.red, fontSize: 18),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Container(
-            width: 300,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).primaryColor,
-              ),
-              onPressed: () async {
-                signUserIn(emailAddressController, passwordController);
-              },
-              child: Text(
-                'Login',
-                style: TextStyle(fontSize: 15),
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              AuthMode.Signup == true;
-            },
-            child: Text('Sign Up Here!'),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.g_translate,
-                  color: Colors.red,
-                ),
-                Text(
-                  '    Google Sign In',
-                  style: TextStyle(color: Colors.red, fontSize: 18),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
