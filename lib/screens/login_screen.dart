@@ -9,24 +9,13 @@ enum AuthMode { Signup, Login }
 Auth authFunctions = Auth();
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = '/login-screen';
-
-// FirebaseAuth.instance
-//   .authStateChanges()
-//   .listen((User user) {
-//     if (user == null) {
-//       print('User is currently signed out!');
-//     } else {
-//       print('User is signed in!');
-//     }
-//   });
+  static const routeName = '/login-screen';  
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   FirebaseAuth auth = FirebaseAuth.instance;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
