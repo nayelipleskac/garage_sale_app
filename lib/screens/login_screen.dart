@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:new2u_project/screens/all_listings_screen.dart';
+import 'package:new2u_project/screens/product_overview_screen.dart';
 
 import '../logic/auth.dart';
 
@@ -9,7 +11,7 @@ enum AuthMode { Signup, Login }
 Auth authFunctions = Auth();
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = '/login-screen';  
+  static const routeName = '/login-screen';
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -33,9 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   Future<void> _submit() async {
-    // final enteredEmail = emailAddressController.text;
-    // final enteredPassword = passwordController.text;
-
     if (!_formKey.currentState.validate()) {
       //Invalid!
       return;
@@ -55,12 +54,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (_authMode == AuthMode.Login) {
       // Sign user in
+      Navigator.of(context).pushNamed(AllListingsScreen.routeName);
       await signUserIn(
         _authData['email'],
         _authData['password'],
       );
     } else {
       // Sign user up
+      Navigator.of(context).pushNamed(AllListingsScreen.routeName);
       await signUserUp(
         _authData['email'],
         _authData['password'],

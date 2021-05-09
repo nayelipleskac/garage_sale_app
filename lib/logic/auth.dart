@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:new2u_project/screens/product_overview_screen.dart';
 
 class Auth {
   String _token;
@@ -44,13 +46,13 @@ Future<void> signUserIn(String email, String password) async {
   try {
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: 'test4@gmail.com',
-      password: '123456',
+      email: email,
+      password: password,
     );
   } on FirebaseAuthException catch (e) {
     return e.message;
   } catch (err) {
-    return 'unknown error';
+    return 'unknown error- sign in';
   }
 }
 
@@ -59,16 +61,12 @@ Future<void> signUserUp(String email, String password) async {
   try {
     UserCredential userCredential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: 'test4@gmail.com',
-      password: '123456',
+      email: email,
+      password: password,
     );
   } on FirebaseAuthException catch (e) {
-    // if (e.code == 'weak-password') {
-    //   print('The password provided is too weak.');
-    // } else if (e.code == 'email-already-in-use') {
-    //   print('The account already exists for that email.');
-    // }
-  } catch (e) {
-    print(e);
+    return e.message;
+  } catch (err) {
+    return 'unknown error- sign up';
   }
 }
