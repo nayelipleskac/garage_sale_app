@@ -1,8 +1,6 @@
-import 'dart:async';
+
 import 'package:flutter/material.dart';
-
 import 'package:camera/camera.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 
 import './screens/all_listings_detail_screen.dart';
@@ -13,6 +11,8 @@ import './screens/take_picture_screen.dart';
 import './screens/product_overview_screen.dart';
 import './screens/add_product_screen_with_image.dart';
 import './screens/login_screen.dart';
+import './screens/verify_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,6 +63,7 @@ class MyApp extends StatelessWidget {
         ProductOverviewScreen.routeName: (ctx) => ProductOverviewScreen(),
         AllListingsDetailScreen.routeName: (ctx) => AllListingsDetailScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),
+        VerifyScreen.routeName: (ctx) => VerifyScreen(),
       },
     );
   }

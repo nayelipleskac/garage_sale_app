@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:new2u_project/screens/all_listings_screen.dart';
 import 'package:new2u_project/screens/product_overview_screen.dart';
+import 'package:new2u_project/screens/verify_screen.dart';
 
 import '../logic/auth.dart';
 
@@ -19,6 +20,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
+  User user = FirebaseAuth.instance.currentUser;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -52,6 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
 
+  //verifying users email
+    if (!user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+
     if (_authMode == AuthMode.Login) {
       // Sign user in
       Navigator.of(context).pushNamed(AllListingsScreen.routeName);
@@ -61,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     } else {
       // Sign user up
-      Navigator.of(context).pushNamed(AllListingsScreen.routeName);
+      Navigator.of(context).pushNamed(VerifyScreen.routeName);
       await signUserUp(
         _authData['email'],
         _authData['password'],
