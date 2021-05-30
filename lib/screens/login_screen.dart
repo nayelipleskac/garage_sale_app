@@ -54,10 +54,10 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
 
-  //verifying users email
-    if (!user.emailVerified) {
-      await user.sendEmailVerification();
-    }
+    //verifying users email
+    // if (!user.emailVerified) {
+    //   await user.sendEmailVerification();
+    // }
 
     if (_authMode == AuthMode.Login) {
       // Sign user in
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 45,
+              height: 55,
             ),
             Padding(
               padding: const EdgeInsets.all(25.0),

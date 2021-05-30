@@ -221,7 +221,8 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
               Container(
                 margin: EdgeInsets.all(10),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.yellow),
+                  style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor),
                   //style: TextStyle(color:  Theme.of(context).primaryColor,  textColor: Colors.white, ),
                   onPressed: () => _presentDatePicker(context),
 

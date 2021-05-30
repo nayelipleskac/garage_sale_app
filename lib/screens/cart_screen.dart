@@ -5,7 +5,6 @@ import '../widgets/drawer.dart';
 import '../widgets/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
-
   static const routeName = '/cart-screen';
 
   @override
@@ -188,12 +187,15 @@ class _CartScreenState extends State<CartScreen> {
                     // Text(getTotalAmount().toString()),
                     Container(
                       width: 350,
-                      child: RaisedButton(
-                        color: Theme.of(context).primaryColor,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).primaryColor),
                         onPressed: () {},
                         child: Text(
                           'Checkout',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Theme.of(context).accentColor),
                         ),
                       ),
                     ),
