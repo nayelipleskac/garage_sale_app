@@ -19,6 +19,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
   void initState() {
     user = auth.currentUser;
     user.sendEmailVerification();
+    print('verify screen current user ' + user.email + ' ' + user.emailVerified.toString());
 
     timer = Timer.periodic(Duration(seconds: 3), (timer) {
       checkEmailVerified();
@@ -40,7 +41,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   @override
   void dispose() {
-    // dispose widget
+    // dispose widget 
     timer.cancel();
     super.dispose();
   }

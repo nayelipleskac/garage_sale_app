@@ -57,13 +57,14 @@ Future<void> signUserIn(String email, String password) async {
 }
 
 // signing user up
-Future<void> signUserUp(String email, String password) async {
+Future<String> signUserUp(String email, String password) async {
   try {
     UserCredential userCredential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+    return 'success';
   } on FirebaseAuthException catch (e) {
     return e.message;
   } catch (err) {

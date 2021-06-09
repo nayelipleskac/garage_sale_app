@@ -46,13 +46,13 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
 
-    auth.authStateChanges().listen((User user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User is signed in!');
-      }
-    });
+    // auth.authStateChanges().listen((User user) {
+    //   if (user == null) {
+    //     print('User is currently signed out!');
+    //   } else {
+    //     print('User is signed in!');
+    //   }
+    // });
 
     //verifying users email
     // if (!user.emailVerified) {
@@ -61,19 +61,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (_authMode == AuthMode.Login) {
       // Sign user in
-      Navigator.of(context).pushNamed(AllListingsScreen.routeName);
+      // was pushing the nav before the user was actually signed up  e
       await signUserIn(
         _authData['email'],
         _authData['password'],
       );
+      Navigator.of(context).pushNamed(AllListingsScreen.routeName);
     } else {
       // Sign user up
-      Navigator.of(context).pushNamed(VerifyScreen.routeName);
       await signUserUp(
         _authData['email'],
         _authData['password'],
       );
+      Navigator.of(context).pushNamed(VerifyScreen.routeName);
     }
+
+    print('user email ' + user.email + ' ' + user.emailVerified.toString());
 
     setState(() {
       _isLoading = false;
