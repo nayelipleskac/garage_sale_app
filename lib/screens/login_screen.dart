@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
                 alignment: Alignment.center,
                 child: Text(
-                  'Login',
+                  _authMode == AuthMode.Login ? 'Login' : 'Sign Up',
                   style: TextStyle(
                     fontFamily: 'Lato-Light',
                     fontWeight: FontWeight.bold,

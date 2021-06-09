@@ -259,7 +259,7 @@ class _AddProductScreenWithImageState extends State<AddProductScreenWithImage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: () async {
                     if (success == false) {
                       print('SUCCESS IS FALSE');
