@@ -66,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _authData['email'],
         _authData['password'],
       );
+      // if _authData['password']
       Navigator.of(context).pushNamed(AllListingsScreen.routeName);
     } else {
       // Sign user up

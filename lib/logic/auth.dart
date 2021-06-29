@@ -50,7 +50,8 @@ Future<void> signUserIn(String email, String password) async {
       password: password,
     );
   } on FirebaseAuthException catch (e) {
-    return e.message;
+    // return e.message;
+    print('e.message ' + e.message);
   } catch (err) {
     return 'unknown error- sign in';
   }
